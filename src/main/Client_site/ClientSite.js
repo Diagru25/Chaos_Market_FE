@@ -2,8 +2,8 @@
 import React from 'react';
 
 import {Switch, Route, Redirect} from 'react-router-dom';
-import routerLinks from '../../consts/routes.constants';
-import Header from '../../conponents/Header/Header';
+import routerLinks from '../../const/routes.constants';
+import Header from '../../components/Header/Header';
 import HomePage from '../../pages/home_page/HomePage';
 
 import './ClientSite.css'
