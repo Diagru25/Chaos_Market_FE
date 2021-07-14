@@ -1,20 +1,33 @@
-// @flow 
-import React from 'react';
-import { AiOutlineHeart, AiOutlineUser, AiOutlineShoppingCart } from 'react-icons/ai';
+import React from 'react'
+import {
+  AiOutlineHeart,
+  AiOutlineUser,
+  AiOutlineShoppingCart,
+} from 'react-icons/ai'
+import styled from 'styled-components'
 
 const HeaderRightAction = () => {
-    return (
-        <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-        }}>
-            <AiOutlineHeart className='header-icons' />
-            <AiOutlineShoppingCart className='header-icons' />
-            <AiOutlineUser className='header-icons' />
-        </div>
-    );
-};
+  return (
+    <Wrapper>
+      <AiOutlineHeart />
+      <AiOutlineShoppingCart />
+      <AiOutlineUser />
+    </Wrapper>
+  )
+}
 
-export default HeaderRightAction;
+const Wrapper = styled.div`
+  display: flex;
+  gap: 30px;
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: #b3c8e7;
+    cursor: pointer;
+    :hover {
+      fill: #fff;
+    }
+  }
+`
+
+export default HeaderRightAction
