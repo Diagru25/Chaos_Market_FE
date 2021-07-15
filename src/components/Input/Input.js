@@ -1,15 +1,13 @@
-// @flow
-import * as React from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import './Input.css'
 
 const Input = ({ placeholder }) => {
-  return (
-    <FormField>
-      <FormInput type='text' placeholder=' ' />
-      <FormLabel htmlFor='name'>{placeholder || 'Placeholder'}</FormLabel>
-    </FormField>
-  )
+    return (
+        <FormField>
+            <FormInput type='text' placeholder=' ' />
+            <FormLabel htmlFor='name'>{placeholder || 'Placeholder'}</FormLabel>
+        </FormField>
+    )
 }
 
 const FormField = styled.div`
