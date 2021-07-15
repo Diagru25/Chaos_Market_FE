@@ -19,6 +19,6 @@ const store = createStore(
     applyMiddleware(sagaMiddleware)
 )
 
-//sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 
 export {store, history}

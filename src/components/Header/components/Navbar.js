@@ -21,7 +21,7 @@ const Navbar = () => {
                 {isToggle ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
             </DropdownButton>
 
-            <DropdownContent display={isToggle}>
+            <DropdownContent display={isToggle ? isToggle.toString() : undefined}>
                 <DropdownList>
                     <li>Laptop</li>
                     <li>Laptop</li>

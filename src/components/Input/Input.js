@@ -1,13 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Input = ({ placeholder }) => {
+const Input = ({ placeholder, onChange, onKeyDown }) => {
     return (
         <FormField>
-            <FormInput type='text' placeholder=' ' />
-            <FormLabel htmlFor='name'>{placeholder || 'Placeholder'}</FormLabel>
+            <FormInput
+                type='text'
+                placeholder=' ' 
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+            />
+            <FormLabel htmlFor='name'>{placeholder ? placeholder : 'Placeholder'}</FormLabel>
         </FormField>
     )
+}
+
+Input.defaultProps = {
+    onChange: () => {},
+    onKeyDown: () => {}
 }
 
 const FormField = styled.div`

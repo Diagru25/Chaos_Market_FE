@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../const/auth.constants';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '../../constant/auth.constants';
 import { readLocalStorage, writeLocalStorage } from '../../helpers/localStorage';
 
 let isRefreshing = false;
