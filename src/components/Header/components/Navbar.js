@@ -1,37 +1,37 @@
 import React, { useState } from 'react'
 import {
-  AiTwotoneAppstore,
-  AiOutlineCaretDown,
-  AiOutlineCaretUp,
+    AiTwotoneAppstore,
+    AiOutlineCaretDown,
+    AiOutlineCaretUp,
 } from 'react-icons/ai'
 import styled from 'styled-components'
 
 const Navbar = () => {
-  const [isToggle, setIsToggle] = useState(false)
+    const [isToggle, setIsToggle] = useState(false)
 
-  const toggleMenu = () => {
-    setIsToggle(!isToggle)
-  }
+    const toggleMenu = () => {
+        setIsToggle(!isToggle)
+    }
 
-  return (
-    <div>
-      <DropdownButton onClick={toggleMenu} background={isToggle}>
-        <AiTwotoneAppstore />
-        <span>All Products</span>
-        {isToggle ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
-      </DropdownButton>
+    return (
+        <div>
+            <DropdownButton onClick={toggleMenu} background={isToggle}>
+                <AiTwotoneAppstore />
+                <span>All Products</span>
+                {isToggle ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
+            </DropdownButton>
 
-      <DropdownContent display={isToggle}>
-        <DropdownList>
-          <li>Laptop</li>
-          <li>Laptop</li>
-          <li>Laptop</li>
-          <li>Laptop</li>
-          <li>Laptop</li>
-        </DropdownList>
-      </DropdownContent>
-    </div>
-  )
+            <DropdownContent display={isToggle}>
+                <DropdownList>
+                    <li>Laptop</li>
+                    <li>Laptop</li>
+                    <li>Laptop</li>
+                    <li>Laptop</li>
+                    <li>Laptop</li>
+                </DropdownList>
+            </DropdownContent>
+        </div>
+    )
 }
 
 const DropdownButton = styled.button`

@@ -1,10 +1,11 @@
 // @flow 
 import * as React from 'react';
+import Input from '../../components/Input/Input';
 
 const HomePage = () => {
     return (
-        <div>
-            ffsdfd
+        <div style={{padding: '50px'}}>
+            <Input placeholder='name'/>
         </div>
     );
 };
