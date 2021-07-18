@@ -1,10 +1,9 @@
-// @flow
 import React from 'react'
 
 import { Switch, Route } from 'react-router-dom'
-import routerLinks from '../../constant/routes.constants'
-import Header from '../../components/Header/Header'
-import HomePage from '../../pages/home_page/HomePage'
+import routerLinks from '@src/constant/routes.constants'
+import HomePage from '@src/pages/home_page/HomePage'
+import Header from '@src/components/header/Header'
 
 const ClientSite = ({ path }) => {
   return (
