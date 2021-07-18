@@ -1,13 +1,25 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState } from 'react';
 import {
     AiTwotoneAppstore,
     AiOutlineCaretDown,
     AiOutlineCaretUp,
-} from 'react-icons/ai'
-import styled from 'styled-components'
+} from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import globalAction from '../../../redux/global/actions'
 
 const Navbar = () => {
-    const [isToggle, setIsToggle] = useState(false)
+
+    const dispatch = useDispatch();
+
+    const categories = useSelector(state => state.globalReducer.categories);
+    const [isToggle, setIsToggle] = useState(false);
+
+    console.log(categories);
+
+    useEffect(() => {
+        dispatch(globalAction.actions.getListCategories());
+    }, [])
 
     const toggleMenu = () => {
         setIsToggle(!isToggle)
@@ -23,11 +35,11 @@ const Navbar = () => {
 
             <DropdownContent display={isToggle ? isToggle.toString() : undefined}>
                 <DropdownList>
-                    <li>Laptop</li>
-                    <li>Laptop</li>
-                    <li>Laptop</li>
-                    <li>Laptop</li>
-                    <li>Laptop</li>
+                    {
+                        categories.items.map((element, index) => (
+                            <li key={index}>{element.name}</li>
+                        ))
+                    }
                 </DropdownList>
             </DropdownContent>
         </div>
