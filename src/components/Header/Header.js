@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import HeaderRightAction from './components/HeaderRightAction'
-import HeaderSearchField from './components/HeaderSearchField'
-import Navbar from './components/Navbar'
-import styled from 'styled-components'
+import HeaderRightAction from './components/HeaderRightAction';
+import HeaderSearchField from './components/HeaderSearchField';
+import Navbar from './components/Navbar';
+import styled from 'styled-components';
 
 const Header = () => {
   return (
@@ -13,8 +13,8 @@ const Header = () => {
       <HeaderSearchField />
       <HeaderRightAction />
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,13 +24,13 @@ const Wrapper = styled.div`
   background-color: #2d394b;
   color: #fff;
   gap: 50px;
-`
+`;
 
 const Logo = styled.img`
   height: 40px;
   width: 40px;
   min-width: 40px;
   cursor: pointer;
-`
+`;
 
-export default Header
+export default Header;

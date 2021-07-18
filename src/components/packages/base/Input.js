@@ -1,28 +1,30 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const Input = ({ placeholder, onChange, onKeyDown }) => {
-    return (
-        <FormField>
-            <FormInput
-                type='text'
-                placeholder=' ' 
-                onChange={onChange}
-                onKeyDown={onKeyDown}
-            />
-            <FormLabel htmlFor='name'>{placeholder ? placeholder : 'Placeholder'}</FormLabel>
-        </FormField>
-    )
-}
+  return (
+    <FormField>
+      <FormInput
+        type="text"
+        placeholder=" "
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
+      <FormLabel htmlFor="name">
+        {placeholder ? placeholder : 'Placeholder'}
+      </FormLabel>
+    </FormField>
+  );
+};
 
 Input.defaultProps = {
-    onChange: () => {},
-    onKeyDown: () => {}
-}
+  onChange: () => {},
+  onKeyDown: () => {},
+};
 
 const FormField = styled.div`
   position: relative;
-`
+`;
 
 const FormLabel = styled.label`
   position: absolute;
@@ -33,7 +35,7 @@ const FormLabel = styled.label`
   color: #999;
   pointer-events: none;
   transition: 0.25s ease;
-`
+`;
 
 const FormInput = styled.input`
   padding: 10px 20px;
@@ -54,5 +56,5 @@ const FormInput = styled.input`
     color: #6a5af9;
     font-size: 12px;
   }
-`
-export default Input
+`;
+export default Input;

@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import {
   AiOutlineHeart,
   AiOutlineUser,
   AiOutlineShoppingCart,
-} from 'react-icons/ai'
-import styled from 'styled-components'
+} from 'react-icons/ai';
+import styled from 'styled-components';
 
 const HeaderRightAction = () => {
   return (
@@ -13,8 +13,8 @@ const HeaderRightAction = () => {
       <AiOutlineShoppingCart />
       <AiOutlineUser />
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,6 +28,6 @@ const Wrapper = styled.div`
       fill: #fff;
     }
   }
-`
+`;
 
-export default HeaderRightAction
+export default HeaderRightAction;

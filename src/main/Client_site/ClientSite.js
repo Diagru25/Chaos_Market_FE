@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import { Switch, Route } from 'react-router-dom'
-import routerLinks from '@src/constant/routes.constants'
-import HomePage from '@src/pages/home_page/HomePage'
-import Header from '@src/components/header/Header'
+import { Switch, Route } from 'react-router-dom';
+import routerLinks from '@src/constant/routes.constants';
+import HomePage from '@src/pages/home_page/HomePage';
+import Header from '@src/components/header/Header';
 
 const ClientSite = ({ path }) => {
   return (
@@ -24,7 +24,7 @@ const ClientSite = ({ path }) => {
         </Route>
       </Switch>
     </Route>
-  )
-}
+  );
+};
 
-export default ClientSite
+export default ClientSite;

@@ -1,66 +1,66 @@
-import axios from 'axios'
+import axios from 'axios';
 
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '@src/constant/auth.constants'
-import { readLocalStorage, writeLocalStorage } from '@helpers/localStorage'
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@src/constant/auth.constants';
+import { readLocalStorage, writeLocalStorage } from '@helpers/localStorage';
 
-let isRefreshing = false
-let failedQueue = []
+let isRefreshing = false;
+let failedQueue = [];
 
 const processQueue = (error, token = null) => {
   failedQueue.forEach((prom) => {
     if (error) {
-      prom.reject(error)
+      prom.reject(error);
     } else {
-      prom.resolve(token)
+      prom.resolve(token);
     }
-  })
+  });
 
-  failedQueue = []
-}
+  failedQueue = [];
+};
 
-const instance = axios.create()
+const instance = axios.create();
 
-instance.defaults.timeout = 2500000
-instance.defaults.baseURL = process.env.REACT_APP_BASE_URL || ''
+instance.defaults.timeout = 2500000;
+instance.defaults.baseURL = process.env.REACT_APP_BASE_URL || '';
 
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    return config
+    return config;
   },
   function (error) {
     // Do something with request error
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-)
+);
 
 // Add a response interceptor
 instance.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    return response
+    return response;
   },
   function (error) {
-    let originalRequest = error.config
+    let originalRequest = error.config;
     if (error.response.status === 401) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
-          failedQueue.push({ resolve, reject })
+          failedQueue.push({ resolve, reject });
         })
           .then((token) => {
-            originalRequest.headers['Authorization'] = 'Bearer ' + token
-            return instance(originalRequest)
+            originalRequest.headers['Authorization'] = 'Bearer ' + token;
+            return instance(originalRequest);
           })
           .catch((err) => {
-            return Promise.reject(err)
-          })
+            return Promise.reject(err);
+          });
       }
 
-      isRefreshing = true
+      isRefreshing = true;
 
-      const refreshToken = readLocalStorage(REFRESH_TOKEN)
+      const refreshToken = readLocalStorage(REFRESH_TOKEN);
       return new Promise((resolve, reject) => {
         axios
           .post(
@@ -74,41 +74,41 @@ instance.interceptors.response.use(
           )
           .then((res) => {
             // TODO: khi nào có api refresh token thì chỉnh sửa lại
-            const accessToken = res.data.token
-            writeLocalStorage(ACCESS_TOKEN, accessToken)
+            const accessToken = res.data.token;
+            writeLocalStorage(ACCESS_TOKEN, accessToken);
 
-            originalRequest.headers['Authorization'] = 'Bearer ' + accessToken
-            processQueue(null, accessToken)
-            resolve(instance(originalRequest))
+            originalRequest.headers['Authorization'] = 'Bearer ' + accessToken;
+            processQueue(null, accessToken);
+            resolve(instance(originalRequest));
           })
           .catch((err) => {
-            processQueue(err, null)
-            reject(err)
+            processQueue(err, null);
+            reject(err);
           })
           .finally(() => {
-            isRefreshing = false
-          })
-      })
+            isRefreshing = false;
+          });
+      });
     }
 
-    return Promise.reject(error.response)
+    return Promise.reject(error.response);
   }
-)
+);
 
 const setRequestParams = (url, params) => {
   if (typeof params === 'object' && params !== null) {
-    const keyParams = Object.keys(params)
-    const arrayParams = []
+    const keyParams = Object.keys(params);
+    const arrayParams = [];
     for (const key of keyParams) {
-      const param = key + '=' + params[key]
-      arrayParams.push(param)
+      const param = key + '=' + params[key];
+      arrayParams.push(param);
     }
     if (Array.isArray(arrayParams) && arrayParams.length) {
-      url = url + '?' + arrayParams.join('&')
+      url = url + '?' + arrayParams.join('&');
     }
   }
-  return url
-}
+  return url;
+};
 
 export const request = ({
   method,
@@ -120,12 +120,12 @@ export const request = ({
 }) => {
   return new Promise((resolve, reject) => {
     if (isAuthRequest) {
-      const accessToken = readLocalStorage(ACCESS_TOKEN)
-      headers['Authorization'] = `Bearer ${accessToken}`
+      const accessToken = readLocalStorage(ACCESS_TOKEN);
+      headers['Authorization'] = `Bearer ${accessToken}`;
     }
 
     // set request params
-    url = setRequestParams(url, params)
+    url = setRequestParams(url, params);
 
     instance({
       method,
@@ -134,10 +134,10 @@ export const request = ({
       headers,
     })
       .then((response) => {
-        resolve(response.data)
+        resolve(response.data);
       })
       .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        reject(err);
+      });
+  });
+};

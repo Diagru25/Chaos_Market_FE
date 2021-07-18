@@ -1,29 +1,29 @@
-import React from 'react'
-import styled from 'styled-components'
-import { AiOutlineSearch } from 'react-icons/ai'
+import React from 'react';
+import styled from 'styled-components';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 const HeaderSearchField = ({ value, onChange, onSearch }) => {
   return (
     <FormWrapper>
-      <SearchInput type='text' placeholder='search somethings...' />
+      <SearchInput type="text" placeholder="search somethings..." />
       <ButtonSearch>
         <SearchIcon />
       </ButtonSearch>
     </FormWrapper>
-  )
-}
+  );
+};
 
 HeaderSearchField.defaultProps = {
   onChange: () => {},
   onSearch: () => {},
-}
+};
 
 const FormWrapper = styled.form`
   display: flex;
   align-items: center;
   position: relative;
   flex: 1 1 auto;
-`
+`;
 
 const SearchInput = styled.input`
   background: #fff;
@@ -35,14 +35,14 @@ const SearchInput = styled.input`
   border: none;
   border-radius: 5px;
   width: 100%;
-`
+`;
 
 const ButtonSearch = styled.button`
   position: absolute;
   background-color: #fff;
   border: none;
   right: 5px;
-`
+`;
 
 const SearchIcon = styled(AiOutlineSearch)`
   font-size: 20px;
@@ -51,6 +51,6 @@ const SearchIcon = styled(AiOutlineSearch)`
   &:hover {
     fill: #333;
   }
-`
+`;
 
-export default HeaderSearchField
+export default HeaderSearchField;
