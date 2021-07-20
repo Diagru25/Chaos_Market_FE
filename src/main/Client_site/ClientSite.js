@@ -7,28 +7,27 @@ import Header from '@src/components/header/Header';
 
 const ClientSite = ({ path }) => {
     return (
-        <Route path={path + ''}>
+        <Route path={path}>
             <Switch>
-                <Route path={path}>
+                <div>
                     <Header />
-                    <div>
-                        <Switch>
-                            <Route
+                    <Switch>
+                        <Route
                                 exact
                                 path={routerLinks.PRODUCT_DETAIL}
                                 component={() => <div>product detail</div>}
                             />
-                            <Route
-                                exact
-                                path={routerLinks.CATEGORIES}
-                                component={() => <div>CATEGORIES</div>}
-                            />
-                            <Route path={routerLinks.HOME} component={HomePage} />
-                        </Switch>
-                    </div>
-                </Route>
+                        <Route
+                            exact
+                            path={routerLinks.CATEGORIES}
+                            component={() => <h1>CATEGORIES</h1>}
+                        />
+                        <Route exact path={routerLinks.HOME} component={HomePage} />
+                    </Switch>
+                </div>
             </Switch>
         </Route>
+
     );
 };
 

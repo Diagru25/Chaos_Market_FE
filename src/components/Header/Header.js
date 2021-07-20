@@ -6,14 +6,13 @@ import Navbar from './components/Navbar';
 import Link from '@base/Link';
 
 import styled from 'styled-components';
-import { history } from '../../redux/store';
-import { Redirect } from 'react-router-dom';
+import routerLinks from '@src/constant/routes.constants';
 
 const Header = () => {
     return (
         <Wrapper>
             
-            <Link to='/'>
+            <Link to={routerLinks.HOME}>
                 <Logo src={require('../../assets/logo.svg').default} />
             </Link>
                 

@@ -7,6 +7,8 @@ import Link from '@base/Link';
 import { IoCloudDownloadOutline, IoSearch } from 'react-icons/io5'
 import { useState } from 'react';
 
+import routerLinks from '@src/constant/routes.constants';
+
 const HomePage = () => {
 
     console.log('abc')
@@ -58,7 +60,7 @@ const HomePage = () => {
             >
                 Download
             </IconButton>
-            <Link to='/categories'>this link</Link>
+            <Link to={routerLinks.CATEGORIES}>this link</Link>
         </div>
     );
 };
