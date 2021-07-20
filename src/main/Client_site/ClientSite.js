@@ -6,25 +6,30 @@ import HomePage from '@src/pages/home_page/HomePage';
 import Header from '@src/components/header/Header';
 
 const ClientSite = ({ path }) => {
-  return (
-    <Route path={path + ''}>
-      <Switch>
-        <Route path={path}>
-          <Header />
-          <div>
+    return (
+        <Route path={path + ''}>
             <Switch>
-              <Route
-                exact
-                path={routerLinks.PRODUCT_DETAIL}
-                component={() => <div>product detail</div>}
-              />
-              <Route path={routerLinks.HOME} component={HomePage} />
+                <Route path={path}>
+                    <Header />
+                    <div>
+                        <Switch>
+                            <Route
+                                exact
+                                path={routerLinks.PRODUCT_DETAIL}
+                                component={() => <div>product detail</div>}
+                            />
+                            <Route
+                                exact
+                                path={routerLinks.CATEGORIES}
+                                component={() => <div>CATEGORIES</div>}
+                            />
+                            <Route path={routerLinks.HOME} component={HomePage} />
+                        </Switch>
+                    </div>
+                </Route>
             </Switch>
-          </div>
         </Route>
-      </Switch>
-    </Route>
-  );
+    );
 };
 
 export default ClientSite;

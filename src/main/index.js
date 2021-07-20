@@ -4,8 +4,8 @@ import { store, history } from '../redux/store';
 import { Provider } from 'react-redux';
 import { Router, Switch, Redirect } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import AdminSite from './admin_site/AdminSite';
-import ClientSite from './client_site/ClientSite';
+import AdminSite from './Admin_site/AdminSite';
+import ClientSite from './Client_site/ClientSite';
 
 const App = () => {
   return (

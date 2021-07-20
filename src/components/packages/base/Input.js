@@ -1,60 +1,75 @@
-import React from 'react';
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const Input = ({ placeholder, onChange, onKeyDown }) => {
-  return (
-    <FormField>
-      <FormInput
-        type="text"
-        placeholder=" "
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-      />
-      <FormLabel htmlFor="name">
-        {placeholder ? placeholder : 'Placeholder'}
-      </FormLabel>
-    </FormField>
-  );
-};
+const Input = ({ placeholder, onChange, onKeyDown, onClick, icon, type, position }) => {
+    
+    const renderIcon = icon
+        ?
+        <ButtonIcon onClick={onClick} position={position}>
+            {icon}
+        </ButtonIcon>
+        :
+        null;
+    
+    return (
+        <FormWrapper>
+
+
+            {position==='before' && renderIcon}
+            <FormInput
+                type={type}
+                placeholder={placeholder ? placeholder : ''}
+                onChange={onChange}
+                onKeyDown={onKeyDown}
+
+                position={position}
+            >
+            </FormInput>
+            {position==='after' && renderIcon}
+        </FormWrapper>
+
+    )
+}
 
 Input.defaultProps = {
-  onChange: () => {},
-  onKeyDown: () => {},
-};
+    type: 'text',
+    position: 'after',
+    onChange: () => {},
+    onSearch: () => {}
+}
 
-const FormField = styled.div`
-  position: relative;
-`;
+const FormWrapper = styled.div`
+    width: 100%;
+    display: inline-flex;
 
-const FormLabel = styled.label`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 21px;
-  user-select: none;
-  color: #999;
-  pointer-events: none;
-  transition: 0.25s ease;
-`;
-
+`
 const FormInput = styled.input`
-  padding: 10px 20px;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  height: 30px;
-  width: 100%;
-  transition: 0.25s ease;
-  outline: none;
-  &:focus {
-    border-color: #6a5af9;
-  }
-  &:not(:placeholder-shown) + ${FormLabel}, &:focus + ${FormLabel} {
-    top: 0;
-    padding: 0 5px;
-    display: inline-block;
-    background-color: white;
-    color: #6a5af9;
-    font-size: 12px;
-  }
-`;
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid #eee;
+    border-radius: ${(props) => props.position === 'after' ? '4px 0 0 4px' : '0 4px 4px 0'};
+    outline: none;
+
+    flex-grow: 1;
+
+    &:focus {
+        border-color: #00a3ff;
+    }
+`
+
+const ButtonIcon = styled.button`
+
+    display: inline-flex;
+    align-items: center;
+    padding: 0px 15px;
+
+
+    cursor: pointer;
+    border: 1px solid #00a3ff;
+    border-radius: ${(props) => props.position === 'before' ? '4px 0 0 4px' : '0 4px 4px 0'};
+    outline: none;
+    background: #00a3ff;
+    color: #fff;
+    font-size: 1.2rem;
+`
+
 export default Input;

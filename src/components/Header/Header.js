@@ -3,17 +3,28 @@ import React from 'react';
 import HeaderRightAction from './components/HeaderRightAction';
 import HeaderSearchField from './components/HeaderSearchField';
 import Navbar from './components/Navbar';
+import Link from '@base/Link';
+
 import styled from 'styled-components';
+import { history } from '../../redux/store';
+import { Redirect } from 'react-router-dom';
 
 const Header = () => {
-  return (
-    <Wrapper>
-      <Logo src={require('../../assets/logo.svg').default} />
-      <Navbar />
-      <HeaderSearchField />
-      <HeaderRightAction />
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            
+            <Link to='/'>
+                <Logo src={require('../../assets/logo.svg').default} />
+            </Link>
+                
+            
+
+
+            <Navbar />
+            <HeaderSearchField />
+            <HeaderRightAction />
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.div`

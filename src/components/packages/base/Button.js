@@ -33,9 +33,11 @@ const renderColor = (textInput, color) => {
 
 const FormButton = styled.button`
   margin: 0;
-  padding: 5px 15px;
+  padding: 10px 15px;
   outline: none;
   border-radius: 4px;
+  cursor: pointer;
+
   color: ${(props) => {
     if (props.variant === 'outline') {
       return renderColor(props.type, props.color);
@@ -54,7 +56,6 @@ const FormButton = styled.button`
   }};
 
   &:hover {
-    cursor: pointer;
     opacity: 0.8;
   }
 `;
