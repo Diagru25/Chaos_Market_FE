@@ -7,31 +7,46 @@ import { createGlobalStyle } from 'styled-components';
 import AdminSite from './Admin_site/AdminSite';
 import ClientSite from './Client_site/ClientSite';
 
+class Loading extends React.Component {
+    render() {
+        return (
+            <div>
+                Loading....
+            </div>
+        )
+    }
+}
+
 const App = () => {
-  return (
-    <>
-      <GlobalStyle />
-      <Provider store={store}>
-        <Router history={history}>
-          <Switch>
-            <AdminSite path="/admin" />
-            <ClientSite path="/" />
-            <Redirect to="" />
-          </Switch>
-        </Router>
-      </Provider>
-    </>
-  );
+    return (
+        <>
+            <GlobalStyle />
+            <Provider store={store}>
+                <Router>
+                    <React.Suspense fallback={<Loading />}>
+                        <Switch>
+                            <AdminSite path="/admin" />
+                            <ClientSite path="/" />
+                            <Redirect to="" />
+                        </Switch>
+                    </React.Suspense>
+                </Router>
+            </Provider>
+        </>
+    );
 };
 
 const GlobalStyle = createGlobalStyle`
 html,
 body {
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
-  font-size: 14px;
-  font-family: 'Roboto', sans-serif;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+
+    box-sizing: border-box;
 }
 input {
     font-size: 14px;

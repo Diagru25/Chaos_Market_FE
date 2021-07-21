@@ -12,8 +12,6 @@ const Input = ({ placeholder, onChange, onKeyDown, onClick, icon, type, position
     
     return (
         <FormWrapper>
-
-
             {position==='before' && renderIcon}
             <FormInput
                 type={type}

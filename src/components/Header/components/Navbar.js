@@ -14,8 +14,6 @@ const Navbar = () => {
   const categories = useSelector((state) => state.globalReducer.categories);
   const [isToggle, setIsToggle] = useState(false);
 
-  console.log(categories);
-
   useEffect(() => {
     dispatch(globalAction.actions.getListCategories());
   }, []);

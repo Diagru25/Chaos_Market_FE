@@ -35,9 +35,11 @@ const SearchInput = styled.input`
   border: none;
   border-radius: 5px;
   width: 100%;
+  display: none;
 `;
 
 const ButtonSearch = styled.button`
+    display: none;
   position: absolute;
   background-color: #fff;
   border: none;

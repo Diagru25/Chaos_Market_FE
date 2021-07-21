@@ -1,33 +1,31 @@
 import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
-import routerLinks from '@src/constant/routes.constants';
-import HomePage from '@src/pages/home_page/HomePage';
-import Header from '@src/components/header/Header';
+import Header from '@src/components/Header/Header';
+
+import { ClientRoutes } from '../../routes';
 
 const ClientSite = ({ path }) => {
     return (
         <Route path={path}>
-            <Switch>
-                <div>
-                    <Header />
+            <div>
+                <Header />
+                <Switch>
                     <Switch>
-                        <Route
-                                exact
-                                path={routerLinks.PRODUCT_DETAIL}
-                                component={() => <div>product detail</div>}
-                            />
-                        <Route
-                            exact
-                            path={routerLinks.CATEGORIES}
-                            component={() => <h1>CATEGORIES</h1>}
-                        />
-                        <Route exact path={routerLinks.HOME} component={HomePage} />
+                        {
+                            ClientRoutes.map(
+                                (route, index) => <Route
+                                    key={index}
+                                    exact={route.exact}
+                                    path={route.path}
+                                    component={route.component} />
+                            )
+                        }
                     </Switch>
-                </div>
-            </Switch>
-        </Route>
 
+                </Switch>
+            </div>
+        </Route>
     );
 };
 

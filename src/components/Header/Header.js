@@ -6,19 +6,14 @@ import Navbar from './components/Navbar';
 import Link from '@base/Link';
 
 import styled from 'styled-components';
-import routerLinks from '@src/constant/routes.constants';
+import {clientPaths} from '../../routes/routes.constant';
 
 const Header = () => {
     return (
-        <Wrapper>
-            
-            <Link to={routerLinks.HOME}>
-                <Logo src={require('../../assets/logo.svg').default} />
+        <Wrapper> 
+            <Link to={clientPaths.HOME}>
+                <Logo src={require('../../assets/images/logo.svg').default} />
             </Link>
-                
-            
-
-
             <Navbar />
             <HeaderSearchField />
             <HeaderRightAction />
