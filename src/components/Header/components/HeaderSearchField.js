@@ -39,7 +39,7 @@ const SearchInput = styled.input`
 `;
 
 const ButtonSearch = styled.button`
-    display: none;
+  display: none;
   position: absolute;
   background-color: #fff;
   border: none;

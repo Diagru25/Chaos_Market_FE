@@ -6,9 +6,9 @@ import {
 } from 'react-icons/ai';
 import styled from 'styled-components';
 
-const HeaderRightAction = () => {
+const HeaderRightAction = ({ className }) => {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <AiOutlineHeart />
       <AiOutlineShoppingCart />
       <AiOutlineUser />
