@@ -41,7 +41,7 @@ const CustomLink = styled(ReactRouterLink)`
 
     color: black;
     text-decoration: none;
-
+    transition: 0.3s ease;
     &:hover {
         color: #00a3ff;
     }
