@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
-import { store, history } from '../redux/store';
+import { store } from '../redux/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
 import AdminSite from '@src/main/admin_site/AdminSite';
 import ClientSite from '@src/main/client_site/ClientSite';
-import Loading from '@src/components/loading/Loding';
+import Loading from '@src/components/loading/Loading';
 
 const App = () => {
     return (
