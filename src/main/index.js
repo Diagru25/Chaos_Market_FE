@@ -4,32 +4,28 @@ import { store, history } from '../redux/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import AdminSite from './admin_site/AdminSite';
-import ClientSite from './client_site/ClientSite';
 
-class Loading extends React.Component {
-  render() {
-    return <div>Loading....</div>;
-  }
-}
+import AdminSite from '@src/main/admin_site/AdminSite';
+import ClientSite from '@src/main/client_site/ClientSite';
+import Loading from '@src/components/loading/Loding';
 
 const App = () => {
-  return (
-    <>
-      <GlobalStyle />
-      <Provider store={store}>
-        <Router>
-          <React.Suspense fallback={<Loading />}>
-            <Switch>
-              <AdminSite path="/admin" />
-              <ClientSite path="/" />
-              <Redirect to="" />
-            </Switch>
-          </React.Suspense>
-        </Router>
-      </Provider>
-    </>
-  );
+    return (
+        <>
+            <GlobalStyle />
+            <Provider store={store}>
+                <Router>
+                    <React.Suspense fallback={<Loading />}>
+                        <Switch>
+                            <AdminSite path="/admin" />
+                            <ClientSite path="/" />
+                            <Redirect to="" />
+                        </Switch>
+                    </React.Suspense>
+                </Router>
+            </Provider>
+        </>
+    );
 };
 
 const GlobalStyle = createGlobalStyle`

@@ -3,7 +3,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Header from '@src/components/header/Header';
 
-import { ClientRoutes } from '../../routes';
+import { ClientRoutes } from '@src/routes';
 
 const ClientSite = ({ path }) => {
     return (

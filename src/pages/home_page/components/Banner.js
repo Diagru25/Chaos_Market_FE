@@ -4,84 +4,74 @@ import SearchInput from '@base/SearchInput';
 import Link from '@base/Link';
 
 const Banner = () => {
-  return (
-    <BannerWrapper>
-      <Title>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-        repudiandae?
-      </Title>
-      <SubTitle>Best place to buy every things.</SubTitle>
+    return (
+        <BannerWrapper>
+            <Title>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
+                repudiandae?
+            </Title>
+            <SubTitle>Best place to buy every things.</SubTitle>
 
-      <BrandSearch placeholder="search something" />
+            <BrandSearch placeholder="search something" />
 
-      <SubBrandMenu>
-        <BrandItem>
-          <Logo>
-            <img
-              src={require('../../../assets/images/apple.svg').default}
-              alt="Dell"
-            />
-          </Logo>
-          <Text>Apple</Text>
-        </BrandItem>
-
-        <BrandItem>
-          <Logo>
-            <img
-              src={require('../../../assets/images/asus.svg').default}
-              alt="Dell"
-            />
-          </Logo>
-          <Text>Asus</Text>
-        </BrandItem>
-        <BrandItem>
-          <Logo>
-            <img
-              src={require('../../../assets/images/dell.svg').default}
-              alt="Dell"
-            />
-          </Logo>
-          <Text>Dell</Text>
-        </BrandItem>
-        <BrandItem>
-          <Logo>
-            <img
-              src={require('../../../assets/images/apple.svg').default}
-              alt="Dell"
-            />
-          </Logo>
-          <Text>Apple</Text>
-        </BrandItem>
-        <BrandItem>
-          <Logo>
-            <img
-              src={require('../../../assets/images/asus.svg').default}
-              alt="Dell"
-            />
-          </Logo>
-          <Text>Asus</Text>
-        </BrandItem>
-        <BrandItem>
-          <Logo>
-            <img
-              src={require('../../../assets/images/dell.svg').default}
-              alt="Dell"
-            />
-          </Logo>
-          <Text>Dell</Text>
-        </BrandItem>
-        <BrandItem>
-          <Logo>
-            <img
-              src={require('../../../assets/images/apple.svg').default}
-              alt="Dell"
-            />
-          </Logo>
-          <Text>Apple</Text>
-        </BrandItem>
-      </SubBrandMenu>
-    </BannerWrapper>
-  );
+            <SubBrandMenu>
+                <BrandItem>
+                    <Logo>
+                        <img
+                            src={require('../../../assets/images/apple.svg').default}
+                            alt="Dell"
+                        />
+                    </Logo>
+                    <Text>Apple</Text>
+                </BrandItem>
+                <BrandItem>
+                    <Logo>
+                        <img
+                            src={require('../../../assets/images/asus.svg').default}
+                            alt="Dell"
+                        />
+                    </Logo>
+                    <Text>Asus</Text>
+                </BrandItem>
+                <BrandItem>
+                    <Logo>
+                        <img
+                            src={require('../../../assets/images/dell.svg').default}
+                            alt="Dell"
+                        />
+                    </Logo>
+                    <Text>Dell</Text>
+                </BrandItem>
+                <BrandItem>
+                    <Logo>
+                        <img
+                            src={require('../../../assets/images/apple.svg').default}
+                            alt="Dell"
+                        />
+                    </Logo>
+                    <Text>Apple</Text>
+                </BrandItem>
+                <BrandItem>
+                    <Logo>
+                        <img
+                            src={require('../../../assets/images/asus.svg').default}
+                            alt="Dell"
+                        />
+                    </Logo>
+                    <Text>Asus</Text>
+                </BrandItem>
+                <BrandItem>
+                    <Logo>
+                        <img
+                            src={require('../../../assets/images/dell.svg').default}
+                            alt="Dell"
+                        />
+                    </Logo>
+                    <Text>Dell</Text>
+                </BrandItem>
+            </SubBrandMenu>
+        </BannerWrapper>
+    );
 };
 
 const BannerWrapper = styled.div`

@@ -8,7 +8,7 @@ import Link from '@base/Link';
 import { IoCloudDownloadOutline, IoSearch } from 'react-icons/io5'
 import { useState } from 'react';
 
-import { clientPaths } from '../../routes/routes.constant';
+import { clientPaths } from '@src/routes/routes.constant';
 import Banner from './components/Banner';
 
 const HomePage = () => {
