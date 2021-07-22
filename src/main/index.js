@@ -7,7 +7,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import AdminSite from '@src/main/admin_site/AdminSite';
 import ClientSite from '@src/main/client_site/ClientSite';
-import Loading from '@src/components/loading/Loding';
+import Loading from '@src/components/loading/Loading';
 
 const App = () => {
     return (
@@ -35,7 +35,8 @@ body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: normal;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
@@ -46,7 +47,6 @@ a,
 p,
 ul,
 span {
-  line-height: normal;
   padding: 0;
   margin: 0;
 }

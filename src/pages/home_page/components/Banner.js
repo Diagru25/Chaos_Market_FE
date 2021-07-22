@@ -141,7 +141,6 @@ const Logo = styled.div`
 
 const Text = styled.span`
   padding: 10px;
-  font-size: 16px;
 `;
 
 export default Banner;

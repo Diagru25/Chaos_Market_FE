@@ -5,11 +5,12 @@ import IconButton from '@base/IconButton';
 import SearchInput from '@base/SearchInput';
 import Link from '@base/Link';
 
-import { IoCloudDownloadOutline, IoSearch } from 'react-icons/io5'
+import { IoCloudDownloadOutline, IoSearch } from 'react-icons/io5';
 import { useState } from 'react';
 
 import { clientPaths } from '@src/routes/routes.constant';
 import Banner from './components/Banner';
+import Section from '@src/components/packages/base/Section';
 
 const HomePage = () => {
     const [loading, setLoading] = useState(false);
@@ -24,46 +25,48 @@ const HomePage = () => {
 
     const handleClick = () => {
         setLoading(!loading);
-    }
+    };
 
     return (
         <>
             <Banner />
-            <div style={{ padding: '50px' }}>
+            <Section
+                title="Trending"
+                subTitle="Check the hottest website designs of the week. These rising
+                stars are worth your attention."
+            >
                 <FocusInput
                     placeholder="username"
                     onChange={handleOnChange}
                     onKeyDown={handleKeyDown}
                 />
-                <br />
-                <br />
-                <Input type='password' icon={<IoSearch />} position='before' />
-                <br />
-                <br />
-                <Button
-                    type="success"
-                    variant="outline"
-                    onClick={handleClick}
-                >
+
+                <Input type="password" icon={<IoSearch />} position="before" />
+
+                <Button type="success" variant="outline" onClick={handleClick}>
                     loading: {loading.toString()}
                 </Button>
-                <br />
-                <br />
+
                 <IconButton
-                    type='danger'
+                    type="danger"
                     icon={<IoCloudDownloadOutline />}
-                    position='after'
+                    position="after"
                     loading={loading}
                     onClick={() => console.log('click')}
                 >
                     Download
                 </IconButton>
+
                 <Link to={clientPaths.CATEGORIES}>category</Link>
-                <br />
-                <Link to={clientPaths.PRODUCT_DETAIL + '/123'}>product detail</Link>
-                <br />
-                <SearchInput onChange={e => console.log(e.target.value)}></SearchInput>
-            </div>
+
+                <Link to={clientPaths.PRODUCT_DETAIL + '/123'}>
+                    product detail
+                </Link>
+
+                <SearchInput
+                    onChange={(e) => console.log(e.target.value)}
+                ></SearchInput>
+            </Section>
         </>
     );
 };
