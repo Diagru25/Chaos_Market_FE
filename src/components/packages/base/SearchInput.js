@@ -49,7 +49,7 @@ const ButtonSearch = styled.button`
 `
 
 const SearchIcon = styled(IoSearch)`
-    font-size: 1.5rem;
+    font-size: 1.5em;
     margin: 0;
     padding: 0;
 `

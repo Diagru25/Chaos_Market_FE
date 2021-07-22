@@ -55,19 +55,16 @@ const FormInput = styled.input`
 `
 
 const ButtonIcon = styled.button`
-
     display: inline-flex;
     align-items: center;
     padding: 0px 15px;
-
-
     cursor: pointer;
     border: 1px solid #00a3ff;
     border-radius: ${(props) => props.position === 'before' ? '4px 0 0 4px' : '0 4px 4px 0'};
     outline: none;
     background: #00a3ff;
     color: #fff;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
 `
 
 export default Input;

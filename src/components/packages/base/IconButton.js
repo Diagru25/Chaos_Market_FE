@@ -1,19 +1,26 @@
 import styled, { keyframes } from 'styled-components';
 import { AiOutlineLoading } from 'react-icons/ai';
 
-const IconButton = ({ children, onClick, icon, type, color, loading, position }) => {
-
-
+const IconButton = ({
+    children,
+    onClick,
+    icon,
+    type,
+    color,
+    loading,
+    position,
+}) => {
     const renderIcon = (
         <Icon>
-            {loading ?
+            {loading ? (
                 <Rotate>
                     <AiOutlineLoading />
                 </Rotate>
-                : icon
-            }
+            ) : (
+                icon
+            )}
         </Icon>
-    )
+    );
 
     return (
         <Button
@@ -33,8 +40,8 @@ IconButton.defaultProps = {
     type: 'primary',
     position: 'before',
     loading: false,
-    onclick: () => { }
-}
+    onclick: () => {},
+};
 
 const renderColor = (textInput, color) => {
     if (color) return color;
@@ -65,7 +72,7 @@ const Button = styled.button`
     overflow: hidden;
 
     color: #fff;
-    cursor: ${(props) => props.loading ? 'default' : 'pointer'};
+    cursor: ${(props) => (props.loading ? 'default' : 'pointer')};
     background: ${(props) => {
         return renderColor(props.type, props.color);
     }};
@@ -73,27 +80,23 @@ const Button = styled.button`
     &:hover {
         opacity: 0.9;
     }
-
-`
+`;
 
 const Text = styled.span`
     display: inline-flex;
     align-items: center;
     padding: 10px 15px;
-
     height: 100%;
-`
+`;
 
 const Icon = styled.span`
     display: inline-flex;
     align-items: center;
     padding: 10px 15px;
-
     height: 100%;
-
-    font-size: 1.2em;
-    background: rgba(0,0,0,0.08);
-`
+    font-size: 1em;
+    background: rgba(0, 0, 0, 0.08);
+`;
 
 const rotate = keyframes`
     from {
@@ -111,7 +114,7 @@ const Rotate = styled.div`
     outline: none;
     margin: 0;
     padding: 0;
-    font-size: 1rem;
+    font-size: 1em;
     animation: ${rotate} 1s linear infinite;
 `;
 

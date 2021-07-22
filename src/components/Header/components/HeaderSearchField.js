@@ -29,7 +29,6 @@ const SearchInput = styled.input`
   background: #fff;
   box-shadow: none;
   color: #243238;
-  font-size: 16px;
   padding: 10px;
   outline: none;
   border: none;
