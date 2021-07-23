@@ -12,7 +12,7 @@ const Card = ({ product }) => {
     else
         return (
             <CardContainer>
-                <Link>
+                <Link to={`${clientPaths.PRODUCT_DETAIL}/${product._id}`}>
                     <Image
                         src={`${process.env.REACT_APP_BASE_URL}v1/resources/images/${product.image}`}
                         alt='Product Image'
@@ -20,7 +20,7 @@ const Card = ({ product }) => {
                 </Link>
 
                 <BoxContent>
-                    <Link>
+                    <Link to={`${clientPaths.PRODUCT_DETAIL}/${product._id}`}>
                         <Title>
                             {product.name} - {product.status}
                         </Title>
@@ -77,7 +77,7 @@ const BoxContent = styled.div`
 const Image = styled.img`
     width: 100%;
     max-width: 300px;
-
+    min-width: 300px;
     text-align: center;
 `;
 

@@ -5,7 +5,6 @@ import categoryAPI from '../../services/api/categoryAPI';
 function* getAllCategories_saga() {
     try {
         const data = yield categoryAPI.getAllCategories();
-        console.log(data);
 
         yield put(actions.actions.getListCategoriesSuccess({items: data}));
     }
