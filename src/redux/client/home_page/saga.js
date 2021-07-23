@@ -10,7 +10,7 @@ function* getBestSellerProducts_saga() {
     }
     catch (error) {
         yield put(client_HomeActions.actions.getListBestSellerProductFailed(error))
-        console.log('[GLOBAL SAGA][getAllCategories_saga]', error);
+        console.log('[CLIENT_HOME_PAGE SAGA][getBestSellerProducts_saga]', error);
     }
 }
 

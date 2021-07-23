@@ -14,7 +14,7 @@ const Card = ({ product }) => {
             <CardContainer>
                 <Link to={`${clientPaths.PRODUCT_DETAIL}/${product._id}`}>
                     <Image
-                        src={`${process.env.REACT_APP_BASE_URL}v1/resources/images/${product.image}`}
+                        src={`${process.env.REACT_APP_BASE_URL}/v1/resources/images/${product.image}`}
                         alt='Product Image'
                     />
                 </Link>
