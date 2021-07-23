@@ -3,12 +3,12 @@ import { AiOutlineLoading } from 'react-icons/ai';
 
 const IconButton = ({
     children,
-    onClick,
     icon,
     type,
     color,
     loading,
     position,
+    ...rest
 }) => {
     const renderIcon = (
         <Icon>
@@ -27,7 +27,7 @@ const IconButton = ({
             type={type}
             color={color}
             loading={loading}
-            onClick={loading ? () => {} : onClick}
+            {...rest}
         >
             {position === 'before' && renderIcon}
             <Text>{children}</Text>

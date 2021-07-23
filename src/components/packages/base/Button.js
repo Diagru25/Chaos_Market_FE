@@ -1,34 +1,33 @@
 import styled from 'styled-components';
 
-const Button = ({ children, onClick, type, variant, color }) => {
-  return (
-    <FormButton type={type} variant={variant} color={color} onClick={onClick}>
-      {children}
-    </FormButton>
-  );
+const Button = ({ children, type, variant, color, ...rest }) => {
+    return (
+        <FormButton type={type} variant={variant} color={color} {...rest}>
+            {children}
+        </FormButton>
+    );
 };
 
 Button.defaultProps = {
-  type: 'primary',
-  variant: 'fill',
-  onClick: () => {},
+    variant: 'fill',
+    onClick: () => { },
 };
 
 const renderColor = (textInput, color) => {
-  if (color) return color;
+    if (color) return color;
 
-  switch (textInput) {
-    case 'primary':
-      return '#1875ed';
-    case 'danger':
-      return '#ff4d4f';
-    case 'success':
-      return '#198754';
-    case 'warning':
-      return '#ffc107';
-    default:
-      return '#1875ed';
-  }
+    switch (textInput) {
+        case 'primary':
+            return '#1875ed';
+        case 'danger':
+            return '#ff4d4f';
+        case 'success':
+            return '#198754';
+        case 'warning':
+            return '#ffc107';
+        default:
+            return '#00a3ff';
+    }
 };
 
 const FormButton = styled.button`
@@ -39,21 +38,21 @@ const FormButton = styled.button`
   cursor: pointer;
 
   color: ${(props) => {
-    if (props.variant === 'outline') {
-      return renderColor(props.type, props.color);
-    }
+        if (props.variant === 'outline') {
+            return renderColor(props.type, props.color);
+        }
 
-    return '#fff';
-  }};
+        return '#fff';
+    }};
   border: 1px solid
     ${(props) => {
-      return renderColor(props.type, props.color);
+        return renderColor(props.type, props.color);
     }};
   background-color: ${(props) => {
-    if (props.variant === 'outline') return '#fff';
+        if (props.variant === 'outline') return '#fff';
 
-    return renderColor(props.type, props.color);
-  }};
+        return renderColor(props.type, props.color);
+    }};
 
   &:hover {
     opacity: 0.8;

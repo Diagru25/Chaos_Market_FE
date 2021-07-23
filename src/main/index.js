@@ -35,10 +35,11 @@ body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    font-size: 16px;
-    line-height: normal;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
+
+    background-color: #f0f2f5;
 }
 
 div,
@@ -47,6 +48,7 @@ a,
 p,
 ul,
 span {
+  line-height: normal;
   padding: 0;
   margin: 0;
 }
@@ -55,7 +57,6 @@ input {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
 }
-
 
 
 a {

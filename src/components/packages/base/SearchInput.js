@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import { IoSearch } from 'react-icons/io5';
 
-const SearchInput = ({ w, placeholder, className, style, ...rest}) => {
+const SearchInput = ({ w, placeholder, className, style, onSearch, ...rest}) => {
     return (
         <FormWrapper w={w} className={className}>
             <FormInput placeholder={placeholder} style={style} {...rest}>
             </FormInput>
-            <ButtonSearch>
+            <ButtonSearch onClick={onSearch}>
                 <SearchIcon />
             </ButtonSearch>
         </FormWrapper>
 
     )
+}
+
+SearchInput.defaultProps = {
+    onSearch: () => {}
 }
 
 const FormWrapper = styled.div`
