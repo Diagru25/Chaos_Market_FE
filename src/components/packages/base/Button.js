@@ -36,6 +36,9 @@ const FormButton = styled.button`
   outline: none;
   border-radius: 4px;
   cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
   color: ${(props) => {
         if (props.variant === 'outline') {
@@ -49,7 +52,7 @@ const FormButton = styled.button`
         return renderColor(props.type, props.color);
     }};
   background-color: ${(props) => {
-        if (props.variant === 'outline') return '#fff';
+    if (props.variant === 'outline') return 'transparent';
 
         return renderColor(props.type, props.color);
     }};

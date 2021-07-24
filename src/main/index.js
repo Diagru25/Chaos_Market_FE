@@ -58,6 +58,15 @@ input {
     font-family: 'Roboto', sans-serif;
 }
 
+button {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+svg {
+    padding: 0px 5px;
+    font-size: 1.3rem;
+}
 
 a {
   text-decoration: none;

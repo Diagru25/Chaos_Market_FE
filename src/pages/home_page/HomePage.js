@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import Banner from './components/Banner';
 import Section from '@src/components/packages/base/Section';
 import Card from '@src/components/card/Card';
-import Skeleton from '@src/components/packages/base/Skeleton';
+import { IoEyeSharp } from 'react-icons/io5'
 
 import client_HomeActions from '@src/redux/client/home_page/actions';
+import Button from '@src/components/packages/base/Button';
 
 const HomePage = () => {
 
@@ -44,6 +45,10 @@ const HomePage = () => {
                 <Section
                     title='NEW PRODUCTS'
                 >
+                    <Button variant='fill'>
+                        <IoEyeSharp />
+                        Demo
+                    </Button>
                 </Section>
 
             </Container>
