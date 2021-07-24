@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Banner from './components/Banner';
 import Section from '@src/components/packages/base/Section';
 import Card from '@src/components/card/Card';
+import Skeleton from '@src/components/packages/base/Skeleton';
 
 import client_HomeActions from '@src/redux/client/home_page/actions';
 
@@ -15,8 +16,9 @@ const HomePage = () => {
 
     useEffect(() => {
         dispatch(client_HomeActions.actions.getListBestSellerProduct());
-    },[dispatch])
+    }, [dispatch])
 
+    console.log(bestSellerProducts.isGetBestSellerProductPending);
     return (
         <>
             <Banner />
@@ -25,8 +27,19 @@ const HomePage = () => {
                     title='BEST SELLER'
                 >
                     {
-                        bestSellerProducts.items.map((product, index) => <Card key={index} product={product}/>)
+                        bestSellerProducts.isGetBestSellerProductPending
+                            ?
+                            <>
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                                <Card />
+                            </>
+                            :
+                            bestSellerProducts.items.map((product, index) => <Card key={index} product={product} />)
                     }
+
                 </Section>
                 <Section
                     title='NEW PRODUCTS'

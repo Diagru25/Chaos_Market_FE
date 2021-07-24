@@ -2,13 +2,34 @@ import styled from "styled-components";
 import RatingStarDisplay from "../packages/base/RatingStarDisplay";
 import Button from '@base/Button';
 import Link from "../packages/base/Link";
+import Skeleton from "../packages/base/Skeleton";
 
 import { clientPaths } from '@src/routes/routes.constant';
 
 const Card = ({ product }) => {
 
     if (!product)
-        return null
+        return (
+            <CardContainer style={{ width: '300px', height: '250px', paddingTop: '15px'}}>
+                <Skeleton w='90%' h='30%'/>
+                <BoxContent>
+                    <Skeleton h='14px' />
+                    <RatingBox>
+                        <Skeleton w='40%' />
+                    </RatingBox>
+
+                    <InfoBox>
+                        <Skeleton w='30%'/>
+                        <Skeleton w='30%'/>
+                    </InfoBox>
+
+                    <ActionsBox style={{paddingTop: '15px'}}>
+                        <Skeleton w='40%' h='2rem'/>
+                        <Skeleton w='40%' h='2rem'/>
+                    </ActionsBox>
+                </BoxContent>
+            </CardContainer>
+        )
     else
         return (
             <CardContainer>
@@ -128,8 +149,5 @@ const ActionsBox = styled.div`
 
     justify-content: space-between;
 `;
-
-
-
 
 export default Card;
