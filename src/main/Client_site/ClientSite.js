@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
 import Header from '@src/components/header/Header';
+import Footer from '@src/components/footer/Footer';
 
 import { ClientRoutes } from '@src/routes';
 
@@ -22,8 +23,8 @@ const ClientSite = ({ path }) => {
                             )
                         }
                     </Switch>
-
                 </Switch>
+                <Footer />
             </div>
         </Route>
     );
