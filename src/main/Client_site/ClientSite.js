@@ -5,13 +5,27 @@ import Header from '@src/components/header/Header';
 import Footer from '@src/components/footer/Footer';
 
 import { ClientRoutes } from '@src/routes';
+import { clientPaths } from '@src/routes/routes.constant';
+
+import CartPage from '@src/pages/cart_page/CartPage';
+
+import LoginRequired from '@src/components/login_required/LoginRequired';
+import ClientLayoutAuth from './ClientLayoutAuth';
 
 const ClientSite = ({ path }) => {
     return (
         <Route path={path}>
-            <div>
-                <Header />
-                <Switch>
+
+            <Switch>
+                <ClientLayoutAuth path={clientPaths.AUTH}/>
+                <LoginRequired
+                    exact
+                    path={clientPaths.CART}
+                    component={CartPage}
+                    redirectLink={clientPaths.AUTH_LOGIN}
+                />
+                <div>
+                    <Header />
                     <Switch>
                         {
                             ClientRoutes.map(
@@ -23,9 +37,9 @@ const ClientSite = ({ path }) => {
                             )
                         }
                     </Switch>
-                </Switch>
-                <Footer />
-            </div>
+                    <Footer />
+                </div>
+            </Switch>
         </Route>
     );
 };

@@ -1,3 +1,4 @@
+import Link from '@src/components/packages/base/Link';
 import React from 'react';
 import {
   AiOutlineHeart,
@@ -10,7 +11,10 @@ const HeaderRightAction = ({ className }) => {
   return (
     <Wrapper className={className}>
       <AiOutlineHeart />
-      <AiOutlineShoppingCart />
+      <Link to='/cart'>
+          <AiOutlineShoppingCart />
+      </Link>
+      
       <AiOutlineUser />
     </Wrapper>
   );

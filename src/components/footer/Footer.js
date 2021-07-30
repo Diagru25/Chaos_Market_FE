@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import {IoLogoInstagram, IoLogoFacebook, IoLogoYoutube, IoLogoTwitter} from 'react-icons/io5';
+import { IoLogoInstagram, IoLogoFacebook, IoLogoYoutube, IoLogoTwitter } from 'react-icons/io5';
+import Link from "../packages/base/Link";
+
+import { clientPaths } from "@src/routes/routes.constant";
 
 const Footer = () => {
     return (
@@ -7,20 +10,23 @@ const Footer = () => {
             <ContentBox>
                 <InfoBox>
                     <DescriptionBox>
-                        <LogoBox>
-                            <Logo src={require('../../assets/images/logo.svg').default}/>
-                            <Name>CHAOS MARKET</Name>
-                        </LogoBox>
+                        <Link to={clientPaths.HOME}>
+                            <LogoBox>
+                                <Logo src={require('../../assets/images/logo.svg').default} />
+                                <Name>CHAOS MARKET</Name>
+                            </LogoBox>
+                        </Link>
+
                         <Text>
-                            TemplateMonster is a marketplace where you can buy everything you need to create a website. 
+                            TemplateMonster is a marketplace where you can buy everything you need to create a website.
                             Hundreds of independent developers sell their products here so that you could create your own unique project.
                         </Text>
                     </DescriptionBox>
                     <LinkedBox>
-                        <IoLogoInstagram/>
-                        <IoLogoFacebook/>
-                        <IoLogoYoutube/>
-                        <IoLogoTwitter/>
+                        <IoLogoInstagram />
+                        <IoLogoFacebook />
+                        <IoLogoYoutube />
+                        <IoLogoTwitter />
                     </LinkedBox>
                 </InfoBox>
                 <ContactsBox>

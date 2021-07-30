@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FocusInput = ({ placeholder, onChange, onKeyDown }) => {
+const FocusInput = ({ placeholder, onChange, onKeyDown, type='text' }) => {
     return (
         <FormField>
             <FormInput
-                type="text"
+                type={type}
                 placeholder=" "
                 onChange={onChange}
                 onKeyDown={onKeyDown}

@@ -5,13 +5,13 @@ const types = {
 }
 
 const actions = {
-    getListBestSellerProduct() {
+    getListBestSellerProduct: () => {
         return {
             type: types.GET_LIST_BEST_SELLER_PRODUCT,
             payload: {}
         }
     },
-    getListBestSellerProductSuccess(bestSellerProductsResult) {
+    getListBestSellerProductSuccess: (bestSellerProductsResult) => {
         return {
             type: types.GET_LIST_BEST_SELLER_PRODUCT_SUCCESS,
             payload: { 
@@ -19,7 +19,7 @@ const actions = {
             }
         }
     },
-    getListBestSellerProductFailed(error) {
+    getListBestSellerProductFailed: (error) => {
         return {
             type: types.GET_LIST_BEST_SELLER_PRODUCT_FAILED,
             payload: {

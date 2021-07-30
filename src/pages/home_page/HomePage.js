@@ -18,7 +18,6 @@ const HomePage = () => {
         dispatch(client_HomeActions.actions.getListBestSellerProduct());
     }, [dispatch])
 
-    console.log(bestSellerProducts.isGetBestSellerProductPending);
     return (
         <>
             <Banner />
