@@ -13,7 +13,7 @@ const initialState = {
 
     isLoading: false,
 
-    user: null
+    userInfo: null
 }
 
 const reducer = (state = initialState, action) => {
