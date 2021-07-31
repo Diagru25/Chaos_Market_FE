@@ -5,7 +5,8 @@
     "paths": {
       "@src/*": ["src/*"],
       "@base/*":["src/components/packages/base/*"],
-      "@helpers/*":["src/components/packages/core/helpers/*"]
+      "@helpers/*":["src/components/packages/core/helpers/*"],
+      "@hooks/*":["src/components/packages/core/hooks/*"]
     }
   },
 

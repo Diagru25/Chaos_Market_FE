@@ -8,6 +8,7 @@ import { createGlobalStyle } from 'styled-components';
 import AdminSite from '@src/main/admin_site/AdminSite';
 import ClientSite from '@src/main/client_site/ClientSite';
 import Loading from '@src/components/loading/Loading';
+import ToastContainer from '@src/components/packages/base/Toast';
 
 const App = () => {
     return (
@@ -21,8 +22,10 @@ const App = () => {
                             <ClientSite path="/" />
                             <Redirect to="" />
                         </Switch>
+                        <ToastContainer />
                     </React.Suspense>
                 </Router>
+                
             </Provider>
         </>
     );
@@ -40,6 +43,8 @@ body {
     box-sizing: border-box;
 
     background-color: #f0f2f5;
+
+    position: relative;
 }
 
 div,

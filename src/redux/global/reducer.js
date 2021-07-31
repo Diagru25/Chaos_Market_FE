@@ -10,7 +10,13 @@ const initialState = {
         items: [],
         isGetBrandsPending: false,
         error: null
-    }
+    },
+
+    toasts: {
+        items: []
+    },
+
+    test: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -70,6 +76,23 @@ const reducer = (state = initialState, action) => {
                     isGetBrandsPending: false,
                     error: payload.error
                 }
+            }
+        
+        //toasts
+        case globalActions.types.ADD_TOAST:
+            return {
+                ...state,
+                test: [...state.test, {id: payload.id, options: payload.options}]
+            }
+        case globalActions.types.REMOVE_TOAST:
+            return {
+                ...state,
+                test: [...state.test].filter(element => element.id !== payload.id)
+            }
+        case globalActions.types.UPDATE_STATE: 
+            return {
+                ...state,
+                ...payload.state
             }
         default:
             return { ...state }

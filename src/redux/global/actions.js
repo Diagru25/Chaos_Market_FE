@@ -8,19 +8,24 @@ const types = {
     GET_LIST_BRANDS: 'GET_LIST_BRANDS',
     GET_LIST_BRANDS_SUCCESS: 'GET_LIST_BRANDS_SUCCESS',
     GET_LIST_BRANDS_FAILED: 'GET_LIST_BRAND_FAILED',
+
+    //toast
+    ADD_TOAST: 'ADD_TOAST',
+    REMOVE_TOAST: 'REMOVE_TOAST',
+    UPDATE_STATE: 'UPDATE_STATE'
 }
 
 const actions = {
 
     //categories actions
-    getListCategories() {
+    getListCategories: () => {
         return {
             type: types.GET_LIST_CATEGORIES,
             payload: {}
         }
     },
 
-    getListCategoriesSuccess(listCategoriesResult) {
+    getListCategoriesSuccess: (listCategoriesResult) => {
         return {
             type: types.GET_LIST_CATEGORIES_SUCCESS,
             payload: {
@@ -29,7 +34,7 @@ const actions = {
         }
     },
 
-    getListCategoriesFailed(error) {
+    getListCategoriesFailed: (error) => {
         return {
             type: types.GET_LIST_CATEGORIES_FAILED,
             payload: {
@@ -39,14 +44,14 @@ const actions = {
     },
 
     //brands actions
-    getListBrands() {
+    getListBrands: () => {
         return {
             type: types.GET_LIST_BRANDS,
             payload: {}
         }
     },
 
-    getListBrandsSuccess(listBrandsResult) {
+    getListBrandsSuccess: (listBrandsResult) => {
         return {
             type: types.GET_LIST_BRANDS_SUCCESS,
             payload: {
@@ -55,12 +60,36 @@ const actions = {
         }
     },
 
-    getListBrandsFailed(error) {
+    getListBrandsFailed: (error) => {
         return {
             type: types.GET_LIST_BRANDS_FAILED,
             payload: {
                 error
             }
+        }
+    },
+
+    addToast: (id, options) => {
+        return {
+            type: types.ADD_TOAST,
+            payload: {
+                id,
+                options
+            }
+        }
+    },
+
+    removeToast: (id) => {
+        return {
+            type: types.REMOVE_TOAST,
+            payload: {id}
+        }
+    },
+
+    updateState: (state) => {
+        return{
+            type: types.UPDATE_STATE,
+            payload: {state}
         }
     }
 }

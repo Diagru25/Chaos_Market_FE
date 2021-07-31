@@ -15,7 +15,6 @@ import ClientLayoutAuth from './ClientLayoutAuth';
 const ClientSite = ({ path }) => {
     return (
         <Route path={path}>
-
             <Switch>
                 <ClientLayoutAuth path={clientPaths.AUTH}/>
                 <LoginRequired
