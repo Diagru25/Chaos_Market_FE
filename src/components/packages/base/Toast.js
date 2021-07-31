@@ -14,12 +14,12 @@ const Toast = ({ toast, index }) => {
             removeToast(toast.id);
         }, 3000);
 
-        return () => {
-            clearTimeout(timer);
-        };
+        // return () => {
+        //     clearTimeout(timer);
+        // };
     },[toast.id, removeToast])
 
-    return <p>{toast.options.message}-{index}</p>
+    return <p>{toast.options.message}-{toast.id}</p>
 }
 
 const ToastContainer = () => {
