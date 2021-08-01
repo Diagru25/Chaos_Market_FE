@@ -1,14 +1,15 @@
 import authAPI from '@src/services/api/authAPI';
-import {fork, all, takeEvery, put} from 'redux-saga/effects';
+import { fork, all, takeEvery, put } from 'redux-saga/effects';
 import authActions from './actions';
 
 import { writeLocalStorage } from '@src/components/packages/core/helpers/localStorage';
 import { ACCESS_TOKEN } from '@src/constant/auth.constants';
+import globalActions from '../global/actions';
 
 function* checkSession_saga() {
     try {
         const res = yield authAPI.checkSession();
-        if(res.statusCode !== 200) {
+        if (res.statusCode !== 200) {
             yield put(authActions.actions.updateState({
                 isLoading: false,
                 isLoggedIn: false,
@@ -27,11 +28,11 @@ function* checkSession_saga() {
 
 function* loginClient_saga(action) {
     try {
-        const {username, password} = action.payload;
+        const { username, password } = action.payload;
 
         const res = yield authAPI.loginClient(username, password);
 
-        if(res.code === 200) {
+        if (res.code === 200) {
             const sessionKey = res.access_token;
             writeLocalStorage(ACCESS_TOKEN, sessionKey);
 
@@ -41,7 +42,14 @@ function* loginClient_saga(action) {
                 sessionKey: sessionKey,
                 isLoggedIn: true,
                 isLoading: false,
-                userInfo: userInfo
+                userInfo: userInfo,
+                error: null
+            }))
+
+            yield put(globalActions.actions.addToast({
+                title: 'Sign in success',
+                description: 'Welcome to Chaos market!',
+                type: 'success'
             }))
         }
 
@@ -52,9 +60,17 @@ function* loginClient_saga(action) {
         yield put(authActions.actions.updateState({
             isLoading: false,
             isLoggedIn: false,
-            sessionKey: null
+            sessionKey: null,
+            error: 'Sign in failed'
         }));
+
+        yield put(globalActions.actions.addToast({
+            title: 'Sign in failed',
+            description: 'Check your account or internet, please!',
+            type: 'error'
+        }))
     }
+
 }
 
 function* listen() {

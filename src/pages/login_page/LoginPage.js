@@ -1,29 +1,34 @@
 
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 
 import Button from '@src/components/packages/base/Button';
 import FocusInput from '@src/components/packages/base/FocusInput';
+import Link from '@src/components/packages/base/Link';
 
 import { IoLogInOutline, IoLogoFacebook, IoLogoApple } from 'react-icons/io5';
 import { FcGoogle } from 'react-icons/fc';
 
 import authActions from '@src/redux/auth/actions';
-import Link from '@src/components/packages/base/Link';
 
 import { clientPaths } from '@src/routes/routes.constant';
-
 
 const LoginPage = () => {
 
     const dispatch = useDispatch();
+    const { isLoggedIn } = useSelector(state => state.authReducer)
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleClick = () => {
         dispatch(authActions.actions.loginClient(username, password));
+    }
+
+    if (isLoggedIn) {
+        return <Redirect to='/'/>
     }
 
     return (
@@ -91,6 +96,7 @@ const LoginPage = () => {
             </Content>
         </Wrapper>
     );
+
 };
 
 

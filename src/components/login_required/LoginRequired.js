@@ -7,8 +7,6 @@ const LoginRequired = ({redirectLink, location, ...rest}) => {
     const dispatch = useDispatch();
     const {isLoggedIn} = useSelector(state => state.authReducer);
 
-    console.log(isLoggedIn)
-
     if(!isLoggedIn) {
         return (
             <Redirect

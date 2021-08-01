@@ -9,10 +9,10 @@ const _getSessionKey = () => {
 
 const initialState = {
     sessionKey: _getSessionKey(),
-    isLoggedIn: _getSessionKey != null,
+    isLoggedIn: _getSessionKey() != null,
 
     isLoading: false,
-
+    error: null,
     userInfo: null
 }
 

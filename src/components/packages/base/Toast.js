@@ -11,7 +11,7 @@ import {
     IoAlertCircleOutline
 } from 'react-icons/io5'
 
-const Toast = ({ toast, index }) => {
+const Toast = ({ toast }) => {
 
     const { removeToast } = useToast();
 
@@ -46,7 +46,7 @@ const Toast = ({ toast, index }) => {
         <ToastWrapper type={toast.type} id='toast'>
             <ToastTitleBox>
                 <Icon>{renderIcon()}</Icon>
-                <Title>{toast.title}-{toast.id}</Title>
+                <Title>{toast.title}</Title>
             </ToastTitleBox>
             <ToastDescription>
                 {toast.description}
@@ -64,7 +64,7 @@ const ToastContainer = () => {
     return createPortal(
         <Wrapper>
             {toasts.map((toast, index) => (
-                <Toast key={index} toast={toast} index={index} />
+                <Toast key={index} toast={toast} />
             ))}
         </Wrapper>,
         document.body
@@ -90,7 +90,7 @@ const fadeOut = keyframes`
     }
 
     to {
-        transform: translateX(120%);
+        transform: translateX(110%);
         opacity: 0;
     }
 `;

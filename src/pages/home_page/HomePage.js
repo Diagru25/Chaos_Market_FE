@@ -9,11 +9,8 @@ import SubscriptionBlock from '@src/components/subscription_block/SubscriptionBl
 
 import client_HomeActions from '@src/redux/client/home_page/actions';
 
-import useToast from '@hooks/useToast';
 
 const HomePage = () => {
-
-    const {addToast} = useToast();
     const dispatch = useDispatch();
     const bestSellerProducts = useSelector(state => state.client_HomeReducer.bestSellerProducts);
 
@@ -21,18 +18,9 @@ const HomePage = () => {
         dispatch(client_HomeActions.actions.getListBestSellerProduct());
     }, [dispatch])
 
-    const handleClick = () => {
-        addToast({
-            title: 'Message',
-            description: 'kdasdnhnceinsoisjds',
-            type: 'error',
-            isClosable: false
-        });
-    }
     return (
         <>
             <Banner />
-            <button onClick={handleClick}>TESTSTTST</button>
             <Container>
                 <Section
                     title='BEST SELLER'
