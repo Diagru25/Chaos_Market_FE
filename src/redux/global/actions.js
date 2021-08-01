@@ -69,11 +69,10 @@ const actions = {
         }
     },
 
-    addToast: (id, options) => {
+    addToast: (options) => {
         return {
             type: types.ADD_TOAST,
             payload: {
-                id,
                 options
             }
         }

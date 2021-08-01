@@ -8,7 +8,15 @@ const useToast = () => {
 
     const addToast = useCallback((options) => {
         const id = Math.floor(Math.random() * 100);
-        dispatch(globalActions.actions.addToast(id, options));
+        const defaultOption = {
+            id: null,
+            title: '',
+            description: '',
+            type: 'success',
+            isClosable: false
+        }
+        const cloneOptions = { ...defaultOption, id, ...options };
+        dispatch(globalActions.actions.addToast(cloneOptions));
     }, [dispatch])
 
     const removeToast = useCallback((id) => {

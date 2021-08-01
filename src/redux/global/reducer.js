@@ -12,11 +12,7 @@ const initialState = {
         error: null
     },
 
-    toasts: {
-        items: []
-    },
-
-    test: []
+    toasts: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -82,12 +78,12 @@ const reducer = (state = initialState, action) => {
         case globalActions.types.ADD_TOAST:
             return {
                 ...state,
-                test: [...state.test, {id: payload.id, options: payload.options}]
+                toasts: [...state.toasts, {...payload.options}]
             }
         case globalActions.types.REMOVE_TOAST:
             return {
                 ...state,
-                test: [...state.test].filter(element => element.id !== payload.id)
+                toasts: [...state.toasts].filter(element => element.id !== payload.id)
             }
         case globalActions.types.UPDATE_STATE: 
             return {

@@ -22,7 +22,12 @@ const HomePage = () => {
     }, [dispatch])
 
     const handleClick = () => {
-        addToast({message: 'test'});
+        addToast({
+            title: 'Message',
+            description: 'kdasdnhnceinsoisjds',
+            type: 'error',
+            isClosable: false
+        });
     }
     return (
         <>
