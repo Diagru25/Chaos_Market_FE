@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
@@ -18,7 +18,13 @@ import { clientPaths } from '@src/routes/routes.constant';
 const LoginPage = () => {
 
     const dispatch = useDispatch();
-    const { isLoggedIn } = useSelector(state => state.authReducer)
+
+    
+    useEffect(() => {
+        dispatch(authActions.actions.checkSession());
+    },[]);
+
+    const { isLoggedIn } = useSelector(state => state.authReducer);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -28,8 +34,9 @@ const LoginPage = () => {
     }
 
     if (isLoggedIn) {
-        return <Redirect to='/'/>
+        return <Redirect to='/' />;
     }
+    
 
     return (
         <Wrapper>

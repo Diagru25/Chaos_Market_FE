@@ -11,12 +11,14 @@ import CartPage from '@src/pages/cart_page/CartPage';
 
 import LoginRequired from '@src/components/login_required/LoginRequired';
 import ClientLayoutAuth from './ClientLayoutAuth';
+import ClientProfileLayout from './ClientProfileLayout';
 
 const ClientSite = ({ path }) => {
     return (
         <Route path={path}>
             <Switch>
                 <ClientLayoutAuth path={clientPaths.AUTH}/>
+                <ClientProfileLayout path='/profile'/>
                 <LoginRequired
                     exact
                     path={clientPaths.CART}

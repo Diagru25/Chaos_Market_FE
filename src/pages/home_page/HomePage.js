@@ -8,9 +8,11 @@ import Card from '@src/components/card/Card';
 import SubscriptionBlock from '@src/components/subscription_block/SubscriptionBlock';
 
 import client_HomeActions from '@src/redux/client/home_page/actions';
+import { useHistory } from 'react-router-dom';
 
 
 const HomePage = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const bestSellerProducts = useSelector(state => state.client_HomeReducer.bestSellerProducts);
 
@@ -21,6 +23,7 @@ const HomePage = () => {
     return (
         <>
             <Banner />
+            <button onClick={() => {history.push('/auth/login')}}>sdsdasdasd</button>
             <Container>
                 <Section
                     title='BEST SELLER'

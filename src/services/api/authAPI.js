@@ -2,7 +2,7 @@ import {request} from './baseRequest';
 
 
 const authAPI = {
-    checkSession(){
+    checkSession: () => {
         return request({
             url: '/auth/check-session',
             method: 'GET',
@@ -10,7 +10,7 @@ const authAPI = {
         })
     },
 
-    loginClient(username, password) {
+    loginClient: (username, password) => {
         return request({
             url: '/auth/login',
             method: 'POST',
@@ -19,6 +19,14 @@ const authAPI = {
                 password: password
             },
             isAuthRequest: false
+        })
+    },
+
+    getUserInfo: () => {
+        return request({
+            url: '/v1/users/info',
+            method: 'GET',
+            isAuthRequest: true
         })
     }
 }

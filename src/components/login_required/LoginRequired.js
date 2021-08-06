@@ -11,17 +11,19 @@ const LoginRequired = ({redirectLink, location, ...rest}) => {
         return (
             <Redirect
                 to={{
-                    pathname: redirectLink ? redirectLink : '',
-                    state: location
+                    pathname: redirectLink ? redirectLink : '/auth/login',
+                    state: {
+                        from: location
+                    }
                 }}
             />
         )
     }
     else {
-        dispatch(authActions.actions.checkSession());
+        ;
         return ( 
             <Switch>
-                <Route {...rest} />
+                <Route {...rest} onEnter={dispatch(authActions.actions.checkSession())}/>
             </Switch>
         )
     }

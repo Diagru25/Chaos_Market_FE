@@ -5,8 +5,27 @@ import Link from "../packages/base/Link";
 import Skeleton from "../packages/base/Skeleton";
 
 import { clientPaths } from '@src/routes/routes.constant';
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import cartActions from "@src/redux/client/cart/actions";
+
 
 const Card = ({ product }) => {
+
+    const dispatch = useDispatch();
+
+    const {isLoggedIn} = useSelector(state => state.authReducer);
+
+    const history = useHistory();
+
+    const handleAddToCart = () => {
+       if(isLoggedIn) {
+           dispatch(cartActions.actions.addToCart([]));
+       }
+       else {
+           history.push('/auth/login');
+       }
+    }
 
     if (!product)
         return (
@@ -65,7 +84,7 @@ const Card = ({ product }) => {
                         <Link to={`${clientPaths.PRODUCT_DETAIL}/${product._id}`}>
                             <Button color='#7a929e'>Detail</Button>
                         </Link>
-                        <Button>Add to card</Button>
+                        <Button onClick={handleAddToCart}>Add to card</Button>
                     </ActionsBox>
                 </BoxContent>
             </CardContainer>

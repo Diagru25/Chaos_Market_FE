@@ -7,9 +7,9 @@ import { clientPaths } from '@src/routes/routes.constant';
 import Footer from '@src/components/footer/Footer';
 import Link from '@src/components/packages/base/Link';
 
-const ClientLayoutAuth = ({ path }) => {
+const ClientLayoutAuth = () => {
     return (
-        <Route path={path}>
+        <Route path={clientPaths.AUTH}>
             <Wrapper>
                 <HeaderBox>
                     <HeaderContent>

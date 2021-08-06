@@ -70,12 +70,28 @@ function* loginClient_saga(action) {
             type: 'error'
         }))
     }
+}
 
+function* getUserInfo_saga() {
+    try {
+        const res = yield authAPI.getUserInfo();
+
+        console.log(res);
+    }
+    catch(error) {
+        yield put(authActions.actions.updateState({
+            isLoading: false,
+            isLoggedIn: false,
+            sessionKey: null,
+            error: 'Get user info failed'
+        }));
+    }
 }
 
 function* listen() {
     yield takeEvery(authActions.types.CHECK_SESSION, checkSession_saga);
     yield takeEvery(authActions.types.LOGIN_CLIENT, loginClient_saga);
+    yield takeEvery(authActions.types.GET_USER_INFO, getUserInfo_saga);
 }
 
 export default function* authSaga() {

@@ -20,7 +20,7 @@ const processQueue = (error, token = null) => {
 
 const instance = axios.create();
 
-instance.defaults.timeout = 2500000;
+instance.defaults.timeout = 25000;
 instance.defaults.baseURL = process.env.REACT_APP_BASE_URL || '';
 
 // Add a request interceptor

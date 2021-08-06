@@ -38,8 +38,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 ...payload.state
             }
+
+        case authActions.types.GET_USER_INFO:
+            return state;
         default:
-            return state
+            return state;
     }
 }
 

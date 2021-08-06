@@ -3,6 +3,8 @@ const types = {
 
     LOGIN_CLIENT: 'LOGIN_CLIENT',
 
+    GET_USER_INFO: 'GET_USER_INFO',
+
     UPDATE_STATE: 'UPDATE_STATE'
 }
 
@@ -23,6 +25,13 @@ const actions = {
                 password
             }
         }
+    },
+
+    getUserInfo: () => {
+        return {
+            type: types.GET_USER_INFO,
+            payload: {}
+        }    
     },
 
     updateState: state => {

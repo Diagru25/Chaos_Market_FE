@@ -1,7 +1,7 @@
 // @flow
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { store } from '../redux/store';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
@@ -9,8 +9,15 @@ import AdminSite from '@src/main/admin_site/AdminSite';
 import ClientSite from '@src/main/client_site/ClientSite';
 import Loading from '@src/components/loading/Loading';
 import ToastContainer from '@src/components/packages/base/Toast';
+import authActions from '@src/redux/auth/actions';
 
 const App = () => {
+
+    useEffect(() => {
+        store.dispatch(authActions.actions.getUserInfo());
+    },[])
+    
+
     return (
         <>
             <GlobalStyle />
