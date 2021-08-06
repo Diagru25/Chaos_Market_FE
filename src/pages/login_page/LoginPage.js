@@ -33,6 +33,11 @@ const LoginPage = () => {
         dispatch(authActions.actions.loginClient(username, password));
     }
 
+    const handleKeyDown = (e) => {
+        if(e.key === 'Enter')
+            dispatch(authActions.actions.loginClient(username, password));
+    }
+
     if (isLoggedIn) {
         return <Redirect to='/' />;
     }
@@ -59,6 +64,7 @@ const LoginPage = () => {
                                     placeholder='Password'
                                     type='password'
                                     onChange={e => setPassword(e.target.value)}
+                                    onKeyDown={handleKeyDown}
                                 />
                                 <Spacer />
                             </FormGroup>

@@ -32,15 +32,19 @@ const reducer = (state = initialState, action) => {
                     isLoading: true
                 }
             }
+        case authActions.types.GET_USER_INFO:
+            return state;
 
+        case authActions.types.LOG_OUT:
+            return state;
+            
         case authActions.types.UPDATE_STATE:
             return {
                 ...state,
                 ...payload.state
             }
 
-        case authActions.types.GET_USER_INFO:
-            return state;
+
         default:
             return state;
     }

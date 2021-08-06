@@ -18,7 +18,7 @@ const ClientSite = ({ path }) => {
         <Route path={path}>
             <Switch>
                 <ClientLayoutAuth path={clientPaths.AUTH}/>
-                <ClientProfileLayout path='/profile'/>
+                <ClientProfileLayout path={clientPaths.PROFILE}/>
                 <LoginRequired
                     exact
                     path={clientPaths.CART}

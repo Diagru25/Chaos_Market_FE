@@ -2,6 +2,7 @@ const types = {
     CHECK_SESSION: 'CHECK_SESSION',
 
     LOGIN_CLIENT: 'LOGIN_CLIENT',
+    LOG_OUT: 'LOG_OUT',
 
     GET_USER_INFO: 'GET_USER_INFO',
 
@@ -31,7 +32,16 @@ const actions = {
         return {
             type: types.GET_USER_INFO,
             payload: {}
-        }    
+        }
+    },
+
+    logout: (username = '') => {
+        return {
+            type: types.LOG_OUT,
+            payload: {
+                username
+            }
+        }
     },
 
     updateState: state => {

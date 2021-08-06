@@ -39,9 +39,13 @@ const Link = ({children, style, className, title, onClick, to, ...rest}) => {
 
 const CustomLink = styled(ReactRouterLink)`
 
+    padding: 0;
+    margin: 0;
     color: black;
     text-decoration: none;
     transition: 0.3s ease;
+
+    align-items: center;
     &:hover {
         color: #00a3ff;
     }

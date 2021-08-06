@@ -20,7 +20,7 @@ const ClientProfileLayout = () => {
                     <LoginRequired
                         exact
                         component={() => <div>OOOOOOOOOOO</div>}
-                        path='/profile/info'
+                        path={clientPaths.PROFILE_INFO}
                         redirectLink={clientPaths.AUTH_LOGIN}
                     />
                 </Switch>

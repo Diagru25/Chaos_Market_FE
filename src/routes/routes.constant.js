@@ -10,7 +10,10 @@ export const clientPaths = {
     AUTH: '/auth',
     AUTH_LOGIN: '/auth/login',
     AUTH_FORGOT_PASSWORD: '/auth/forgot-password',
-    AUTH_REGISTER: '/auth/register'
+    AUTH_REGISTER: '/auth/register',
+
+    PROFILE: '/profile',
+    PROFILE_INFO: '/profile/info'
 }
 
 export const adminPaths = {
