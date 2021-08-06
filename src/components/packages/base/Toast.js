@@ -8,11 +8,10 @@ import {
     IoClose,
     IoInformationCircleOutline,
     IoCheckmarkCircleOutline,
-    IoAlertCircleOutline
-} from 'react-icons/io5'
+    IoAlertCircleOutline,
+} from 'react-icons/io5';
 
 const Toast = ({ toast }) => {
-
     const { removeToast } = useToast();
 
     useEffect(() => {
@@ -21,45 +20,41 @@ const Toast = ({ toast }) => {
                 removeToast(toast.id);
             }, 5000);
         }
-    }, [toast.id, removeToast, toast.isClosable])
+    }, [toast.id, removeToast, toast.isClosable]);
 
     const renderIcon = () => {
         switch (toast.type) {
             case 'success':
-                return <IoCheckmarkCircleOutline />
+                return <IoCheckmarkCircleOutline />;
             case 'info':
-                return <IoInformationCircleOutline />
+                return <IoInformationCircleOutline />;
             case 'error':
-                return <IoAlertCircleOutline />
+                return <IoAlertCircleOutline />;
             case 'warning':
-                return <IoAlertCircleOutline />
+                return <IoAlertCircleOutline />;
             default:
-                return <IoInformationCircleOutline />
+                return <IoInformationCircleOutline />;
         }
-    }
+    };
 
     const handleClick = () => {
         removeToast(toast.id);
-    }
+    };
 
     return (
-        <ToastWrapper type={toast.type} id='toast'>
+        <ToastWrapper type={toast.type} id="toast">
             <ToastTitleBox>
                 <Icon>{renderIcon()}</Icon>
                 <Title>{toast.title}</Title>
             </ToastTitleBox>
-            <ToastDescription>
-                {toast.description}
-            </ToastDescription>
-            {
-                toast.isClosable ? <CloseButton onClick={handleClick} /> : null
-            }
+            <ToastDescription>{toast.description}</ToastDescription>
+            {toast.isClosable ? <CloseButton onClick={handleClick} /> : null}
         </ToastWrapper>
-    )
-}
+    );
+};
 
 const ToastContainer = () => {
-    const toasts = useSelector(state => state.globalReducer.toasts);
+    const toasts = useSelector((state) => state.globalReducer.toasts);
 
     return createPortal(
         <Wrapper>
@@ -68,8 +63,8 @@ const ToastContainer = () => {
             ))}
         </Wrapper>,
         document.body
-    )
-}
+    );
+};
 
 const fadeIn = keyframes`
     from {
@@ -106,7 +101,7 @@ const Wrapper = styled.div`
 `;
 
 const ToastWrapper = styled.div`
-    background: ${props => {
+    background: ${(props) => {
         switch (props.type) {
             case 'success':
                 return '#38a169';
@@ -116,7 +111,8 @@ const ToastWrapper = styled.div`
                 return '#e53e3e';
             case 'warning':
                 return '#dd6b20';
-            default: return '#3182ce'
+            default:
+                return '#3182ce';
         }
     }};
     color: #fff;
@@ -129,8 +125,7 @@ const ToastWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    animation: ${fadeIn} 0.5s, ${fadeOut} 0.5s 4.5s; 
+    animation: ${fadeIn} 0.5s, ${fadeOut} 0.5s 4.75s;
 `;
 
 const ToastTitleBox = styled.div`
