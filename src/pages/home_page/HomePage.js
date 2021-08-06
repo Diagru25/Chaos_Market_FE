@@ -10,12 +10,15 @@ import SubscriptionBlock from '@src/components/subscription_block/SubscriptionBl
 import client_HomeActions from '@src/redux/client/home_page/actions';
 import { useHistory } from 'react-router-dom';
 
+import useToast from '@src/components/packages/core/hooks/useToast';
+
 
 const HomePage = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const bestSellerProducts = useSelector(state => state.client_HomeReducer.bestSellerProducts);
 
+    const {addToast} = useToast();
     useEffect(() => {
         dispatch(client_HomeActions.actions.getListBestSellerProduct());
     }, [dispatch])
@@ -23,7 +26,7 @@ const HomePage = () => {
     return (
         <>
             <Banner />
-            <button onClick={() => {history.push('/auth/login')}}>sdsdasdasd</button>
+            <button onClick={() => addToast({title: 'hdahausih', type: 'error'})}>sdsdasdasd</button>
             <Container>
                 <Section
                     title='BEST SELLER'
