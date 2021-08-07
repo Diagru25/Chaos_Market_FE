@@ -14,39 +14,9 @@ function* getAllCategories_saga() {
     }
 }
 
-function* addToast_saga(action) {
-    try {
-        const { items } = yield select(state => state.globalReducer.toasts);
-        const { id, options } = action.payload;
-
-        console.log(id);
-        yield put(actions.actions.updateState({ toasts: { items: [...items, {id, options}] } }));
-    }
-    catch (error) {
-        console.log('[GLOBAL SAGA][addToast_saga]', error);
-    }
-}
-
-function* removeToast_saga(action) {
-    try {
-        const { items } = yield select(state => state.globalReducer.toasts);
-        const { id } = action.payload;
-
-        console.log(id);
-
-        yield put(actions.actions.updateState({ toasts: { items: items.filter(element => element.id !== id) } }));
-
-    }
-    catch (error) {
-        console.log('[GLOBAL SAGA][removeToast_saga]', error);
-    }
-}
-
 function* listen() {
     yield takeEvery(actions.types.GET_LIST_CATEGORIES, getAllCategories_saga);
 
-    //yield takeEvery(actions.types.ADD_TOAST, addToast_saga);
-    //yield takeEvery(actions.types.REMOVE_TOAST, removeToast_saga);
 }
 
 export default function* globalSaga() {

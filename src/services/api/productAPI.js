@@ -1,9 +1,16 @@
 import {request} from './baseRequest';
 
 const productAPI = {
-    getBestSellerProducts() {
+    getBestSellerProducts: () => {
         return request({
             url: '/v1/products/best-seller',
+            method: 'GET'
+        })
+    },
+
+    getProductById: (productId) => {
+        return request({    
+            url: `/v1/products/${productId}`,
             method: 'GET'
         })
     }

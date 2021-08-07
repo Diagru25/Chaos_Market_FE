@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
-const RatingStarDisplay = ({ score }) => {
+const RatingStarDisplay = ({ score, fontSize, ...rest}) => {
     return (
-        <div>
-            <StarContainer score={score}>
+        <div {...rest}>
+            <StarContainer score={score} fontSize={fontSize}>
                 ★★★★★
             </StarContainer>
         </div>
     )
 }
 
-const StarContainer = styled.span`
+const StarContainer = styled.div`
     display: inline-block;
     position: relative;
     color: transparent;
-    font-size: 30px;
+    font-size: ${props => props.fontSize ? props.fontSize : '30px'};
 
     &:before {
         position: absolute;
@@ -22,7 +22,7 @@ const StarContainer = styled.span`
         left: 0;
         content:  '★★★★★';
         color: #f0f2f5;
-        font-size: 30px;
+        font-size: ${props => props.fontSize ? props.fontSize : '30px'};
     }
 
     &:after {
@@ -37,7 +37,7 @@ const StarContainer = styled.span`
 
             return `${calScore}%`
         }};
-        font-size: 30px;
+        font-size: ${props => props.fontSize ? props.fontSize : '30px'};
     }
 `
 

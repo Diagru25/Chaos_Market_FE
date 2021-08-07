@@ -6,7 +6,7 @@ export const ClientRoutes = [
         path: clientPaths.PRODUCT_DETAIL + '/:productId',
         exact: true,
         requireLogin: false,
-        component: lazy(() => import('../pages/product_page/ProductDetail'))
+        component: lazy(() => import('../pages/product_page/product_detail/ProductDetail'))
     },
     // {
     //     path: clientPaths.CATEGORIES,
