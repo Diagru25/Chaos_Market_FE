@@ -1,4 +1,4 @@
-import { all, fork, put, takeEvery, select } from 'redux-saga/effects';
+import { all, fork, put, takeEvery } from 'redux-saga/effects';
 import actions from './actions';
 import categoryAPI from '../../services/api/categoryAPI';
 
