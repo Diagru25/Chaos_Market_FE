@@ -7,9 +7,9 @@ import { Redirect } from 'react-router-dom';
 import Button from '@src/components/packages/base/Button';
 import FocusInput from '@src/components/packages/base/FocusInput';
 import Link from '@src/components/packages/base/Link';
+import GoogleButton from './components/GoogleButton';
 
 import { IoLogInOutline, IoLogoFacebook, IoLogoApple } from 'react-icons/io5';
-import { FcGoogle } from 'react-icons/fc';
 
 import authActions from '@src/redux/auth/actions';
 
@@ -36,6 +36,10 @@ const LoginPage = () => {
     const handleKeyDown = (e) => {
         if(e.key === 'Enter')
             dispatch(authActions.actions.loginClient(username, password));
+    }
+
+    const handleLoginGoogle = () => {
+        dispatch(authActions.actions.loginClientGoogle());
     }
 
     if (isLoggedIn) {
@@ -89,10 +93,7 @@ const LoginPage = () => {
                                     <IoLogoFacebook />
                                     Facebook
                                 </ButtonFacebookLogin>
-                                <ButtonGoogleLogin>
-                                    <FcGoogle />
-                                    Google
-                                </ButtonGoogleLogin>
+                                <GoogleButton/>
                                 <ButtonAppleLogin>
                                     <IoLogoApple />
                                     Apple
@@ -227,15 +228,6 @@ const ButtonAppleLogin = styled(Button)`
     background: #000000;
     padding: 10px 10px 10px 2px;
     border-color: #000000;
-`;
-
-const ButtonGoogleLogin = styled(Button)`
-    margin: 5px;
-    background: #ecf3ff;
-    padding: 10px 10px 10px 2px;
-    border-color: #adcbe3;
-
-    color: black;
 `;
 
 const RegisterGroup = styled.div`

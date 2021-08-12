@@ -32,6 +32,13 @@ const reducer = (state = initialState, action) => {
                     isLoading: true
                 }
             }
+        case authActions.types.LOGIN_CLIENT_GOOGLE:
+            return {
+                ...state,
+                ...{
+                    isLoading: true
+                }
+            }
         case authActions.types.GET_USER_INFO:
             return state;
 

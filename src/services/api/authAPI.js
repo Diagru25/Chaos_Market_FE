@@ -22,6 +22,17 @@ const authAPI = {
         })
     },
 
+    loginClientGoogle: (googleToken) => {
+        return request({
+            url: '/auth/google-authentication',
+            method: 'POST',
+            data: {
+                googleToken
+            },
+            isAuthRequest: false
+        })
+    },
+
     getUserInfo: () => {
         return request({
             url: '/v1/users/info',
@@ -29,6 +40,7 @@ const authAPI = {
             isAuthRequest: true
         })
     }
+
 }
 
 export default authAPI;

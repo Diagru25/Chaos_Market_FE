@@ -73,6 +73,40 @@ function* loginClient_saga(action) {
     }
 }
 
+function* loginClientGoogle_saga(action) {
+    try {
+        
+        const googleToken = action.payload.googleToken;
+        console.log('gg token: ', googleToken);
+        const res = yield authAPI.loginClientGoogle(googleToken);
+        console.log(res);
+
+        if (res.code === 200) {
+            const sessionKey = res.access_token;
+            writeLocalStorage(ACCESS_TOKEN, sessionKey);
+
+            const userInfo = res.user;
+
+            yield put(authActions.actions.updateState({
+                sessionKey: sessionKey,
+                isLoggedIn: true,
+                isLoading: false,
+                userInfo: userInfo,
+                error: null
+            }))
+
+            yield put(globalActions.actions.addToast({
+                title: 'Sign in success',
+                description: 'Welcome to Chaos market!',
+                type: 'success'
+            }))
+        }
+
+    } catch (error) {
+        console.log('[AUTH_SAGA][loginClientGoogle_saga]', error);
+    }
+}
+
 function* getUserInfo_saga() {
     try {
         const res = yield authAPI.getUserInfo();
@@ -138,6 +172,7 @@ function* listen() {
     yield takeEvery(authActions.types.LOGIN_CLIENT, loginClient_saga);
     yield takeEvery(authActions.types.GET_USER_INFO, getUserInfo_saga);
     yield takeEvery(authActions.types.LOG_OUT, logout_saga);
+    yield takeEvery(authActions.types.LOGIN_CLIENT_GOOGLE, loginClientGoogle_saga);
 }
 
 export default function* authSaga() {

@@ -2,6 +2,7 @@ const types = {
     CHECK_SESSION: 'CHECK_SESSION',
 
     LOGIN_CLIENT: 'LOGIN_CLIENT',
+    LOGIN_CLIENT_GOOGLE: 'LOGIN_CLIENT_GOOGLE',
     LOG_OUT: 'LOG_OUT',
 
     GET_USER_INFO: 'GET_USER_INFO',
@@ -25,6 +26,13 @@ const actions = {
                 username,
                 password
             }
+        }
+    },
+
+    loginClientGoogle: (googleToken) => {
+        return {
+            type: types.LOGIN_CLIENT_GOOGLE,
+            payload: { googleToken }
         }
     },
 
