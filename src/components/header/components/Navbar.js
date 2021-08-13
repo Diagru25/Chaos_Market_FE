@@ -1,44 +1,52 @@
+import Link from '@src/components/packages/base/Link';
 import React, { useEffect, useState } from 'react';
 import {
-  AiTwotoneAppstore,
-  AiOutlineCaretDown,
-  AiOutlineCaretUp,
+    AiTwotoneAppstore,
+    AiOutlineCaretDown,
+    AiOutlineCaretUp,
 } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import globalAction from '../../../redux/global/actions';
+import { clientPaths } from '@src/routes/routes.constant';
 
 const Navbar = () => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const categories = useSelector((state) => state.globalReducer.categories);
-  const [isToggle, setIsToggle] = useState(false);
+    const categories = useSelector((state) => state.globalReducer.categories);
+    const [isToggle, setIsToggle] = useState(false);
 
-  useEffect(() => {
-    dispatch(globalAction.actions.getListCategories());
-  }, []);
+    useEffect(() => {
+        dispatch(globalAction.actions.getListCategories());
+    }, []);
 
-  const toggleMenu = () => {
-    setIsToggle(!isToggle);
-  };
+    const toggleMenu = () => {
+        setIsToggle(!isToggle);
+    };
 
-  return (
-    <div>
-      <DropdownButton onClick={toggleMenu} background={isToggle}>
-        <AiTwotoneAppstore />
-        <span>All Products</span>
-        {isToggle ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
-      </DropdownButton>
+    return (
+        <div>
+            <DropdownButton onClick={toggleMenu} background={isToggle}>
+                <AiTwotoneAppstore />
+                <span>All Products</span>
+                {isToggle ? <AiOutlineCaretUp /> : <AiOutlineCaretDown />}
+            </DropdownButton>
 
-      <DropdownContent display={isToggle ? isToggle.toString() : undefined}>
-        <DropdownList>
-          {categories.items.map((element, index) => (
-            <li key={index}>{element.name}</li>
-          ))}
-        </DropdownList>
-      </DropdownContent>
-    </div>
-  );
+            <DropdownContent display={isToggle ? isToggle.toString() : undefined}>
+                <DropdownList>
+                    {categories.items.map((element, index) => (
+                        <MenuItems
+                            key={index}
+                            to={`${clientPaths.PRODUCT_LIST_CATEGORY}?id=${element._id}`}
+                            onClick={() => setIsToggle(false)}
+                        >
+                            {element.name}
+                        </MenuItems>
+                    ))}
+                </DropdownList>
+            </DropdownContent>
+        </div>
+    );
 };
 
 const DropdownButton = styled.button`
@@ -88,6 +96,26 @@ const DropdownList = styled.ul`
       border-radius: 3px;
     }
   }
+`;
+
+const MenuItems = styled(Link)`
+    color: #fff;
+    cursor: pointer;
+    padding: 7px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    span {
+        margin-left: 5px;
+    }
+
+    &:hover {
+        background: #2d394b;
+        border-radius: 3px;
+        color: #fff;
+    }
 `;
 
 export default Navbar;

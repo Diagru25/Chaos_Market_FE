@@ -3,6 +3,9 @@ export const clientPaths = {
     CATEGORIES: '/categories',
     PRODUCT: '/products',
     PRODUCT_DETAIL: '/products-detail',
+    PRODUCT_LIST_CATEGORY: '/products-list/category',
+    PRODUCT_LIST_BRAND: '/products-list/brand',
+    PRODUCT_LIST_SEARCH: '/products-list/search',
 
     CART: '/cart',
     CART_DETAIL: 'CART_DETAIL',

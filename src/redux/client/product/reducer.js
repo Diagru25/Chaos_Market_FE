@@ -18,7 +18,11 @@ const initialState = {
         items: [],
         isGetProductListPending: false,
         error: null,
-        textSearch: ''
+        textSearch: '',
+        category_id: '',
+        brand_id: '',
+
+        pageTitle: ''
     },
 
     currentProduct: defaultProduct

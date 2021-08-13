@@ -19,7 +19,7 @@ const HeaderRightAction = ({ className }) => {
     const dispatch = useDispatch();
     const { userInfo } = useSelector(state => state.authReducer);
 
-    const [toggle, setToggle] = useState(false);
+    const [isToggle, setIsToggle] = useState(false);
 
     const handleLogout = () => {
         dispatch(authActions.actions.logout(userInfo.username));
@@ -41,17 +41,17 @@ const HeaderRightAction = ({ className }) => {
             {
                 userInfo
                     ?
-                    <UserActionBox onClick={() => setToggle(!toggle)} background={toggle}>
+                    <UserActionBox onClick={() => setIsToggle(!isToggle)} background={isToggle}>
                         <Avatar src={userInfo.avatar ? userInfo.avatar : userAvatar} />
                         <UserNameBox>
                             <UserNameText>
                                 {userInfo.username}
                             </UserNameText>
-                            {toggle ? <IconUp /> : <IconDown />}
+                            {isToggle ? <IconUp /> : <IconDown />}
                         </UserNameBox>
-                        <UserActionMenu display={toggle ? toggle.toString() : undefined}>
+                        <UserActionMenu display={isToggle ? isToggle.toString() : undefined}>
 
-                            <MenuItems key={1} to={clientPaths.PROFILE_INFO}>
+                            <MenuItems key={1} to={clientPaths.PROFILE_INFO} onClick={() => setIsToggle(false)}>
                                 <IoPersonCircleOutline />
                                 <span>My account info</span>
                             </MenuItems>

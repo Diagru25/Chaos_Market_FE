@@ -8,18 +8,31 @@ export const ClientRoutes = [
         requireLogin: false,
         component: lazy(() => import('../pages/product_page/product_detail/ProductDetail'))
     },
-    // {
-    //     path: clientPaths.CATEGORIES,
-    //     exact: true,
-    //     requireLogin: false,
-    //     component: lazy(() => import('@src/pages/product_page/ProductDetail'))
-    // },
+    {
+        path: clientPaths.PRODUCT_LIST_CATEGORY,
+        exact: true,
+        requireLogin: false,
+        component: lazy(() => import('../pages/product_page/product_list/ProductListCategory'))
+    },
+    {
+        path: clientPaths.PRODUCT_LIST_BRAND,
+        exact: true,
+        requireLogin: false,
+        component: lazy(() => import('../pages/product_page/product_list/ProductListBrand'))
+    },
+    {
+        path: clientPaths.PRODUCT_LIST_SEARCH,
+        exact: true,
+        requireLogin: false,
+        component: lazy(() => import('../pages/product_page/product_list/ProductListSearch'))
+    },
     {
         path: clientPaths.HOME,
         exact: true,
         requireLogin: false,
         component: lazy(() => import('../pages/home_page/HomePage'))
     }
+
 ]
 
 export const AdminRoutes = [
