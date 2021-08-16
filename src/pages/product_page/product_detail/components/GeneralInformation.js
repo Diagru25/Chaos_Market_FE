@@ -3,9 +3,10 @@ import RatingStarDisplay from '@src/components/packages/base/RatingStarDisplay';
 import Button from '@src/components/packages/base/Button';
 import { FaTruck, FaShippingFast } from 'react-icons/fa';
 import { IoRemove, IoAdd, IoCart, IoShieldCheckmarkSharp, IoArrowUndoCircle } from 'react-icons/io5';
-import styled  from 'styled-components';
+import styled from 'styled-components';
+import { numberWithCommas } from '@src/components/packages/core/helpers/number';
 
-const GeneralInformation = ({product}) => {
+const GeneralInformation = ({ product }) => {
     return (
         <GeneralWrapper>
             <ImageContainer>
@@ -97,11 +98,11 @@ const GeneralInformation = ({product}) => {
                                     : undefined
                             }
                         >
-                            ${product.price}
+                            ${numberWithCommas(product.price)}
                         </RealPrice>
                         <DiscountPrice>
-                            <Price>${product.price}</Price>
-                            <DiscountTag>47% discount</DiscountTag>
+                            <Price>${numberWithCommas(product.price - product.price * product.discount / 100)}</Price>
+                            <DiscountTag>{product.discount}% discount</DiscountTag>
                         </DiscountPrice>
                     </PriceBox>
                     <PromotionBox>

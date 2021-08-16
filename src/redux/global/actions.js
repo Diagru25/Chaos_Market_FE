@@ -12,7 +12,13 @@ const types = {
     //toast
     ADD_TOAST: 'ADD_TOAST',
     REMOVE_TOAST: 'REMOVE_TOAST',
-    UPDATE_STATE: 'UPDATE_STATE'
+    UPDATE_STATE: 'UPDATE_STATE',
+
+    //CART
+    GET_SYNC_CART: 'GET_SYNC_CART',
+    GET_SYNC_CART_SUCCESS: 'GET_SYNC_CART_SUCCESS',
+    GET_SYNC_CART_FAILED: 'GET_SYNC_CART_FAILED',
+    ADD_TO_CART: 'ADD_TO_CART',
 }
 
 const actions = {
@@ -69,6 +75,7 @@ const actions = {
         }
     },
 
+    //toast
     addToast: (options) => {
         return {
             type: types.ADD_TOAST,
@@ -82,6 +89,42 @@ const actions = {
         return {
             type: types.REMOVE_TOAST,
             payload: {id}
+        }
+    },
+
+    //cart
+    addToCart: (productId, quantity) => {
+        return {
+            type: types.ADD_TO_CART,
+            payload: {
+                productId, 
+                quantity
+            }
+        }
+    },
+
+    getSyncCart: () => {
+        return {
+            type: types.GET_SYNC_CART,
+            payload: {}
+        }
+    },
+
+    getSyncCartSuccess: (cartItemsResult) => {
+        return {
+            type: types.GET_SYNC_CART_SUCCESS,
+            payload: {
+                cartItemsResult
+            }
+        }
+    },
+
+    getSyncCartFailed: (error) => {
+        return {
+            type: types.GET_SYNC_CART_SUCCESS,
+            payload: {
+                error
+            }
         }
     },
 

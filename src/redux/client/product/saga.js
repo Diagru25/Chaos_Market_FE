@@ -5,10 +5,9 @@ import productActions from './actions';
 function* getProductById(action) {
     try {
         const { productId } = action.payload;
-        console.log(productId);
 
         const res = yield productAPI.getProductById(productId);
-        console.log(res);
+
         if(res) {
             yield put(productActions.actions.updateState({currentProduct: res}));
         }

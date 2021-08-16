@@ -21,7 +21,7 @@ function* addToCart_saga(action) {
 }
 
 function* listen() {
-    yield takeEvery(cartActions.types.ADD_TO_CART, addToCart_saga);
+    //yield takeEvery(cartActions.types.ADD_TO_CART, addToCart_saga);
 }
 
 export default function* cartSaga() {

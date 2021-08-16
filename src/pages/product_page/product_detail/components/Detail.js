@@ -10,14 +10,17 @@ const Detail = ({ properties, description }) => {
                 </HeaderContainer>
                 <ContentBox>
                     <Table>
-                    {
-                        properties.map((item, index) => (
-                            <tr key={index}>
-                                <td>{item.name}</td>
-                                <td>{item.value}</td>
-                            </tr>
-                        ))
-                    }
+                        <tbody>
+                            {
+                                properties.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.name}</td>
+                                        <td>{item.value}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+
                     </Table>
                 </ContentBox>
             </PropertiesWrapper>

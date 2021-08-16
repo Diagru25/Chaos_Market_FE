@@ -11,6 +11,12 @@ const initialState = {
         isGetBrandsPending: false,
         error: null
     },
+    carts: {
+        items: [],
+        total: 0,
+        isGetSyncCartPending: false,
+        error: null
+    },
 
     toasts: []
 }
@@ -90,6 +96,37 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 ...payload.state
             }
+
+        // carts
+        case globalActions.types.GET_SYNC_CART:
+            return {
+                ...state,
+                carts: {
+                    ...state.carts,
+                    isGetSyncCartPending: true
+                }
+            }
+        case globalActions.types.GET_SYNC_CART_SUCCESS:
+            return {
+                ...state,
+                carts: {
+                    ...state.carts,
+                    isGetSyncCartPending: false,
+                    ...payload.cartItemsResult
+                }
+            }
+        case globalActions.types.GET_SYNC_CART_FAILED:
+            return {
+                ...state,
+                carts: {
+                    ...state.carts,
+                    isGetSyncCartPending: false,
+                    error: payload.error
+                }
+            }
+        case globalActions.types.ADD_TO_CART:
+            return state
+            
         default:
             return { ...state }
     }

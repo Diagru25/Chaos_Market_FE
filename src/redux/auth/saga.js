@@ -54,7 +54,7 @@ function* loginClient_saga(action) {
             }))
         }
 
-        //sync cart
+        yield put(globalActions.actions.getSyncCart());
 
     }
     catch {
@@ -94,6 +94,8 @@ function* loginClientGoogle_saga(action) {
                 userInfo: userInfo,
                 error: null
             }))
+
+            yield put(globalActions.actions.getSyncCart());
 
             yield put(globalActions.actions.addToast({
                 title: 'Sign in success',

@@ -7,7 +7,9 @@ import Skeleton from '../packages/base/Skeleton';
 import { clientPaths } from '@src/routes/routes.constant';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import cartActions from '@src/redux/client/cart/actions';
+import globalActions from '@src/redux/global/actions';
+
+import { numberWithCommas } from '@helpers/number';
 
 const Card = ({ product }) => {
     const dispatch = useDispatch();
@@ -19,7 +21,8 @@ const Card = ({ product }) => {
 
     const handleAddToCart = () => {
         if (isLoggedIn) {
-            dispatch(cartActions.actions.addToCart([]));
+            //console.log(product._id);
+            dispatch(globalActions.actions.addToCart(product._id, 1));
         } else {
             history.push('/auth/login');
         }
@@ -75,9 +78,8 @@ const Card = ({ product }) => {
                             <TextAmount>{product.sold}</TextAmount>
                             <Text>Sales</Text>
                         </SellerBox>
-                        <PriceBox>${product.price}</PriceBox>
+                        <PriceBox>${numberWithCommas(product.price)}</PriceBox>
                     </InfoBox>
-
                     <ActionsBox>
                         <Link
                             to={`${clientPaths.PRODUCT_DETAIL}/${product._id}`}
