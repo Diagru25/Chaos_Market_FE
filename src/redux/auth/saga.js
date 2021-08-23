@@ -10,6 +10,7 @@ import cartActions from '../client/cart/actions';
 function* checkSession_saga() {
     try {
         const res = yield authAPI.checkSession();
+
         if (res.statusCode !== 200) {
             yield put(authActions.actions.updateState({
                 isLoading: false,
@@ -33,25 +34,24 @@ function* loginClient_saga(action) {
 
         const res = yield authAPI.loginClient(username, password);
 
-        if (res.code === 200) {
-            const sessionKey = res.access_token;
+        if (res.statusCode === 200) {
+            const sessionKey = res.data.access_token;
             writeLocalStorage(ACCESS_TOKEN, sessionKey);
-
-            const userInfo = res.user;
 
             yield put(authActions.actions.updateState({
                 sessionKey: sessionKey,
                 isLoggedIn: true,
                 isLoading: false,
-                userInfo: userInfo,
                 error: null
-            }))
+            }));
+
+            yield put(authActions.actions.getUserInfo());
 
             yield put(globalActions.actions.addToast({
                 title: 'Sign in success',
                 description: 'Welcome to Chaos market!',
                 type: 'success'
-            }))
+            }));
         }
 
         yield put(globalActions.actions.getSyncCart());
@@ -75,33 +75,29 @@ function* loginClient_saga(action) {
 
 function* loginClientGoogle_saga(action) {
     try {
-        
+
         const googleToken = action.payload.googleToken;
-        console.log('gg token: ', googleToken);
         const res = yield authAPI.loginClientGoogle(googleToken);
-        console.log(res);
 
-        if (res.code === 200) {
-            const sessionKey = res.access_token;
+        if (res.statusCode === 200) {
+            const sessionKey = res.data.access_token;
             writeLocalStorage(ACCESS_TOKEN, sessionKey);
-
-            const userInfo = res.user;
 
             yield put(authActions.actions.updateState({
                 sessionKey: sessionKey,
                 isLoggedIn: true,
                 isLoading: false,
-                userInfo: userInfo,
                 error: null
-            }))
+            }));
 
+            yield put(authActions.actions.getUserInfo());
             yield put(globalActions.actions.getSyncCart());
 
             yield put(globalActions.actions.addToast({
                 title: 'Sign in success',
                 description: 'Welcome to Chaos market!',
                 type: 'success'
-            }))
+            }));
         }
 
     } catch (error) {
@@ -112,12 +108,13 @@ function* loginClientGoogle_saga(action) {
 function* getUserInfo_saga() {
     try {
         const res = yield authAPI.getUserInfo();
+        const { user } = res.data;
 
-        if(res) {
+        if (user) {
             yield put(authActions.actions.updateState({
                 isLoading: false,
                 isLoggedIn: true,
-                userInfo: res,
+                userInfo: user,
                 error: null
             }))
         }
@@ -132,7 +129,7 @@ function* getUserInfo_saga() {
             clearLocalStorage(ACCESS_TOKEN);
         }
     }
-    catch(error) {
+    catch (error) {
         yield put(authActions.actions.updateState({
             isLoading: false,
             isLoggedIn: false,
@@ -166,7 +163,7 @@ function* logout_saga(action) {
     catch (error) {
         console.log('[AUTH_SAGA][logout]', error);
     }
-    
+
 }
 
 function* listen() {

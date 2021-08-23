@@ -5,9 +5,11 @@ import cartAPI from '@src/services/api/cartAPI';
 
 function* getAllCategories_saga() {
     try {
-        const data = yield categoryAPI.getAllCategories();
+        const res = yield categoryAPI.getAllCategories();
+        const {items} = res.data;
 
-        yield put(actions.actions.getListCategoriesSuccess({ items: data }));
+        if(items)
+            yield put(actions.actions.getListCategoriesSuccess({ items }));
     }
     catch (error) {
         yield put(actions.actions.getListCategoriesFailed(error))
@@ -40,7 +42,11 @@ function* addToCart_saga(action) {
             const res = yield cartAPI.addToCart(productId, quantity);
 
             if(res.statusCode === 201) {
-                yield put(actions.actions.getSyncCart());
+                yield put(actions.actions.addToast({
+                    type: 'success',
+                    title: 'Add to cart success'
+                }));
+                yield put(actions.actions.getSyncCart());   
             }
         }
         else {
@@ -57,7 +63,6 @@ function* listen() {
     yield takeEvery(actions.types.GET_LIST_CATEGORIES, getAllCategories_saga);
     yield takeEvery(actions.types.GET_SYNC_CART, getSyncCart_saga);
     yield takeEvery(actions.types.ADD_TO_CART, addToCart_saga);
-
 }
 
 export default function* globalSaga() {

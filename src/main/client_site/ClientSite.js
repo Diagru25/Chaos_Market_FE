@@ -7,11 +7,9 @@ import Footer from '@src/components/footer/Footer';
 import { ClientRoutes } from '@src/routes';
 import { clientPaths } from '@src/routes/routes.constant';
 
-import CartPage from '@src/pages/cart_page/CartPage';
-
-import LoginRequired from '@src/components/login_required/LoginRequired';
 import ClientLayoutAuth from './ClientLayoutAuth';
 import ClientProfileLayout from './ClientProfileLayout';
+import ClientCartLayout from './ClientCartLayout';
 
 const ClientSite = ({ path }) => {
     return (
@@ -19,15 +17,8 @@ const ClientSite = ({ path }) => {
             <Switch>
                 <ClientLayoutAuth path={clientPaths.AUTH} />
                 <ClientProfileLayout path={clientPaths.PROFILE} />
-                <LoginRequired
-                    exact
-                    path={clientPaths.CART}
-                    component={CartPage}
-                    redirectLink={clientPaths.AUTH_LOGIN}
-                />
+                <ClientCartLayout path={clientPaths.CART} />
                 <Route>
-
-
                     <div>
                         <Header />
                         <Switch>

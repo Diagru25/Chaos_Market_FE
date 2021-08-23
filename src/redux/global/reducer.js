@@ -15,7 +15,9 @@ const initialState = {
         items: [],
         total: 0,
         isGetSyncCartPending: false,
-        error: null
+        error: null,
+
+        prePaymentProductList: []
     },
 
     toasts: []

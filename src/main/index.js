@@ -65,6 +65,10 @@ span {
   margin: 0;
 }
 
+div {
+    box-sizing: border-box;
+}
+
 input {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;

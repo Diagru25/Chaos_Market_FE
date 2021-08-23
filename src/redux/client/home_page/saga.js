@@ -4,9 +4,11 @@ import productAPI from '@src/services/api/productAPI';
 
 function* getBestSellerProducts_saga() {
     try {
-        const data = yield productAPI.getBestSellerProducts();
+        const res = yield productAPI.getBestSellerProducts();
+        const {items} = res.data;
 
-        yield put(client_HomeActions.actions.getListBestSellerProductSuccess({ items: data }));
+        if(items)
+            yield put(client_HomeActions.actions.getListBestSellerProductSuccess({ items }));
     }
     catch (error) {
         yield put(client_HomeActions.actions.getListBestSellerProductFailed(error))

@@ -32,7 +32,7 @@ const HeaderRightAction = ({ className }) => {
             </ActionIcon>
 
 
-            <Link to={clientPaths.CART} style={{ display: 'flex', alignItems: 'center' }}>
+            <Link to={clientPaths.CART_DETAIL} style={{ display: 'flex', alignItems: 'center' }}>
                 <ActionIcon>
                     <IoCartOutline />
                 </ActionIcon>

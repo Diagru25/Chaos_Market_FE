@@ -8,7 +8,7 @@ export const clientPaths = {
     PRODUCT_LIST_SEARCH: '/products-list/search',
 
     CART: '/cart',
-    CART_DETAIL: 'CART_DETAIL',
+    CART_DETAIL: '/cart/cart-detail',
 
     AUTH: '/auth',
     AUTH_LOGIN: '/auth/login',

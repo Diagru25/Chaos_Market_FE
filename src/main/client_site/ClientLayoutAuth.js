@@ -52,7 +52,6 @@ const Wrapper = styled.div`
 
     height: 100%;
     background-color: #fff;
-
 `;
 
 const HeaderBox = styled.div`
