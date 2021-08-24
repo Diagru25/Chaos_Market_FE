@@ -126,6 +126,20 @@ const reducer = (state = initialState, action) => {
                     error: payload.error
                 }
             }
+        case globalActions.types.UPDATE_QUANTITY_CART_ITEM_REDUCER:
+            const cloneItems = [...state.carts.items]
+            const foundIndex = cloneItems.findIndex(item => item._id === payload.cartItemId);
+            if(foundIndex !== -1)
+                cloneItems[foundIndex].quantity = payload.quantity;
+            
+            return {
+                ...state,
+                carts: {
+                    ...state.carts,
+                    items: cloneItems
+                }
+            }
+
         case globalActions.types.ADD_TO_CART:
             return state
             

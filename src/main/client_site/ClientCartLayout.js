@@ -5,7 +5,8 @@ import Footer from '@src/components/footer/Footer';
 import LoginRequired from '@src/components/login_required/LoginRequired';
 import { clientPaths } from '@src/routes/routes.constant';
 import { Route, Switch } from 'react-router-dom';
-import CartPage from '@src/pages/cart_page/CartPage';
+
+const CartPage = React.lazy(() => import('@src/pages/cart_page/CartPage'));
 
 const ClientCartLayout = () => {
     return (

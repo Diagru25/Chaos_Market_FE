@@ -19,6 +19,26 @@ const cartAPI = {
             method: 'GET',
             isAuthRequest: true
         })
+    },
+
+
+    updateQuantityCartItem: (cartItemId, quantity) => {
+        return request({
+            url: `/v1/carts/${cartItemId}`,
+            method: 'PUT',
+            isAuthRequest: true,
+            data: {
+                quantity
+            }
+        })
+    },
+
+    deleteCartItem: (cartItemId) => {
+        return request({
+            url: `/v1/carts/${cartItemId}`,
+            method: 'DELETE',
+            isAuthRequest: true
+        })
     }
     
 }

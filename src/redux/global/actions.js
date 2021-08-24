@@ -19,6 +19,9 @@ const types = {
     GET_SYNC_CART_SUCCESS: 'GET_SYNC_CART_SUCCESS',
     GET_SYNC_CART_FAILED: 'GET_SYNC_CART_FAILED',
     ADD_TO_CART: 'ADD_TO_CART',
+    UPDATE_QUANTITY_CART_ITEM: 'UPDATE_CART_ITEM',
+    UPDATE_QUANTITY_CART_ITEM_REDUCER: 'UPDATE_QUANTITY_CART_ITEM_REDUCER',
+    DELETE_CART_ITEM: 'DELETE_CART_ITEM'
 }
 
 const actions = {
@@ -124,6 +127,35 @@ const actions = {
             type: types.GET_SYNC_CART_SUCCESS,
             payload: {
                 error
+            }
+        }
+    },
+
+    updateQuantityCartItem: (cartItemId, quantity) => {
+        return {
+            type: types.UPDATE_QUANTITY_CART_ITEM,
+            payload: {
+                cartItemId,
+                quantity
+            }
+        }
+    },
+
+    updateQuantityCartItemReducer: (cartItemId, quantity) => {
+        return {
+            type: types.UPDATE_QUANTITY_CART_ITEM_REDUCER,
+            payload: {
+                cartItemId,
+                quantity
+            }
+        }
+    },
+    
+    deleteCartItem: (cartItemId) => {
+        return {
+            type: types.DELETE_CART_ITEM,
+            payload: {
+                cartItemId
             }
         }
     },

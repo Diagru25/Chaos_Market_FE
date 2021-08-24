@@ -1,4 +1,4 @@
-import { all, fork, put, takeEvery } from 'redux-saga/effects';
+import { all, fork, put, select, takeEvery } from 'redux-saga/effects';
 import actions from './actions';
 import categoryAPI from '@src/services/api/categoryAPI';
 import cartAPI from '@src/services/api/cartAPI';
@@ -25,6 +25,9 @@ function* getSyncCart_saga() {
             const {total, items} = res.data;
 
             yield put(actions.actions.getSyncCartSuccess({total, items}));
+        }
+        else {
+            yield put(actions.actions.getSyncCartFailed(res.error));
         }
 
     }
@@ -59,10 +62,52 @@ function* addToCart_saga(action) {
     }
 }
 
+function* updateQuantityCartItem_saga(action) {
+    try {
+        const {cartItemId, quantity} = action.payload;
+        const carts = yield select(state => state.globalReducer.carts);
+        const res = yield cartAPI.updateQuantityCartItem(cartItemId, quantity);
+
+        if(res.statusCode === 200) {
+            const {quantity} = res.data.cartItem;
+            const foundIndex = yield carts.items.findIndex(item => item._id);
+
+            carts.items[foundIndex].quantity = quantity;
+
+            yield put(actions.actions.updateState(carts))
+        }
+        else {
+            console.log('update failed');
+        }
+    }
+    catch (error) {
+        console.log('[GLOBAL SAGA][updateQuantityCartItem_saga]', error);
+    }
+}
+
+function* deleteCartItem_saga(action) {
+    try {
+        const { cartItemId } = action.payload;
+        
+        const res = yield cartAPI.deleteCartItem(cartItemId);
+
+        if(res.statusCode === 200) {
+            
+
+            yield put(actions.actions.getSyncCart());
+        }
+    }
+    catch (error) {
+        console.log('[GLOBAL SAGA][deleteCartItem_saga]', error);
+    }
+}
+
 function* listen() {
     yield takeEvery(actions.types.GET_LIST_CATEGORIES, getAllCategories_saga);
     yield takeEvery(actions.types.GET_SYNC_CART, getSyncCart_saga);
     yield takeEvery(actions.types.ADD_TO_CART, addToCart_saga);
+    yield takeEvery(actions.types.UPDATE_QUANTITY_CART_ITEM, updateQuantityCartItem_saga);
+    yield takeEvery(actions.types.DELETE_CART_ITEM, deleteCartItem_saga);
 }
 
 export default function* globalSaga() {

@@ -122,6 +122,7 @@ const BrandItem = styled(Link)`
   background-color: #fff;
   box-shadow: 0 2px 4px #0003;
   transition: transform 300ms ease-out;
+
   &:hover {
     transform: translateY(-5px);
   }
@@ -133,6 +134,7 @@ const Logo = styled.div`
   min-width: 40px;
   border-bottom: 1px solid #ebeef1;
   padding: 10px 30px;
+  box-sizing: content-box;
   img {
     width: inherit;
     height: inherit;

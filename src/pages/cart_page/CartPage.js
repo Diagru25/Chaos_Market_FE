@@ -5,16 +5,49 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { IoRemove, IoAdd, IoTrashOutline } from 'react-icons/io5';
 import CartNull from './components/CartNull';
+import useToast from '@src/components/packages/core/hooks/useToast';
 
 
 const CartPage = () => {
 
+    const { addToast } = useToast();
     const dispatch = useDispatch();
-    const { items } = useSelector(state => state.globalReducer.carts);
+    const { items, isGetSyncCartPending } = useSelector(state => state.globalReducer.carts);
 
     useEffect(() => {
         dispatch(globalActions.actions.getSyncCart());
     }, [dispatch]);
+
+    const handleChangeQuantity = (cartItemId, quantity) => {
+        if (quantity <= 0) {
+            addToast({
+                type: 'error',
+                title: 'quantity can not less than 0'
+            });
+            return;
+        }
+
+        dispatch(globalActions.actions.updateQuantityCartItem(cartItemId, quantity));
+    }
+
+    const handleKeyDown = (e, cartItemId) => {
+        if (e.key === 'Enter') {
+            handleChangeQuantity(cartItemId, e.target.value);
+            e.target.blur();
+        }
+    }
+
+    const handleBlur = (e, cartItemId) => {
+        handleChangeQuantity(cartItemId, e.target.value);
+    }
+
+    const handleOnChange = (e, cartItemId) => {
+        dispatch(globalActions.actions.updateQuantityCartItemReducer(cartItemId, e.target.value));
+    }
+
+    const handleDelete = (cartItemId) => {
+        dispatch(globalActions.actions.deleteCartItem(cartItemId))
+    }
 
     const renderCartItems = (item) => {
         const product = item.product;
@@ -59,11 +92,16 @@ const CartPage = () => {
                 </td>
                 <td>
                     <QuantityContent>
-                        <IconButton>
+                        <IconButton onClick={() => handleChangeQuantity(item._id, item.quantity - 1)}>
                             <IoRemove />
                         </IconButton>
-                        <InputNumber value={item.quantity} />
-                        <IconButton>
+                        <InputNumber
+                            value={item.quantity}
+                            onChange={(e) => handleOnChange(e, item._id)}
+                            onKeyDown={(e) => handleKeyDown(e, item._id)}
+                            onBlur={(e) => handleBlur(e, item._id)}
+                        />
+                        <IconButton onClick={() => handleChangeQuantity(item._id, item.quantity + 1)}>
                             <IoAdd />
                         </IconButton>
                     </QuantityContent>
@@ -73,7 +111,7 @@ const CartPage = () => {
                     {numberWithCommas(product.price * item.quantity)}
                 </td>
                 <td>
-                    <DeleteButton />
+                    <DeleteButton onClick={() => handleDelete(item._id)}/>
                 </td>
             </tr>
         )
@@ -89,23 +127,27 @@ const CartPage = () => {
             </TopCartWrapper>
             <Container>
                 {
-                    (!items || items.length < 1)
+                    isGetSyncCartPending
                         ?
-                        <CartNull />
+                        <div>loading</div>
                         :
-                        <Table>
-                            <tbody>
-                                <tr>
-                                    <td><input type='checkbox' /></td>
-                                    <td>Product</td>
-                                    <td>Price</td>
-                                    <td>Quantity</td>
-                                    <td>Amount</td>
-                                    <td>Actions</td>
-                                </tr>
-                                {items.map((item) => renderCartItems(item))}
-                            </tbody>
-                        </Table>
+                        (!items || items.length < 1)
+                            ?
+                            <CartNull />
+                            :
+                            <Table>
+                                <tbody>
+                                    <tr>
+                                        <td><input type='checkbox' /></td>
+                                        <td>Product</td>
+                                        <td>Price</td>
+                                        <td>Quantity</td>
+                                        <td>Amount</td>
+                                        <td>Actions</td>
+                                    </tr>
+                                    {items.map((item) => renderCartItems(item))}
+                                </tbody>
+                            </Table>
                 }
             </Container>
         </Wrapper>
