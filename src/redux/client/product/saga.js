@@ -8,9 +8,10 @@ function* getProductById(action) {
 
         const res = yield productAPI.getProductById(productId);
 
-        if(res) {
-            yield put(productActions.actions.updateState({currentProduct: res}));
-        }
+        const {product} = res.data;
+
+        if(product)
+            yield put(productActions.actions.updateState({currentProduct: product}));
     }
     catch (error) {
         console.log('[PRODUCT_SAGA][getProductById]', error);

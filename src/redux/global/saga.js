@@ -6,9 +6,9 @@ import cartAPI from '@src/services/api/cartAPI';
 function* getAllCategories_saga() {
     try {
         const res = yield categoryAPI.getAllCategories();
-        const {items} = res.data;
+        const { items } = res.data;
 
-        if(items)
+        if (items)
             yield put(actions.actions.getListCategoriesSuccess({ items }));
     }
     catch (error) {
@@ -21,13 +21,10 @@ function* getSyncCart_saga() {
     try {
         const res = yield cartAPI.getSyncCart();
 
-        if(res.statusCode === 200) {
-            const {total, items} = res.data;
+        if (res.statusCode === 200) {
+            const { total, items } = res.data;
 
-            yield put(actions.actions.getSyncCartSuccess({total, items}));
-        }
-        else {
-            yield put(actions.actions.getSyncCartFailed(res.error));
+            yield put(actions.actions.getSyncCartSuccess({ total, items }));
         }
 
     }
@@ -39,17 +36,17 @@ function* getSyncCart_saga() {
 
 function* addToCart_saga(action) {
     try {
-        const {productId, quantity} = action.payload;
+        const { productId, quantity } = action.payload;
 
         if (productId && quantity > 0) {
             const res = yield cartAPI.addToCart(productId, quantity);
 
-            if(res.statusCode === 201) {
+            if (res.statusCode === 201) {
                 yield put(actions.actions.addToast({
                     type: 'success',
                     title: 'Add to cart success'
                 }));
-                yield put(actions.actions.getSyncCart());   
+                yield put(actions.actions.getSyncCart());
             }
         }
         else {
@@ -64,12 +61,12 @@ function* addToCart_saga(action) {
 
 function* updateQuantityCartItem_saga(action) {
     try {
-        const {cartItemId, quantity} = action.payload;
+        const { cartItemId, quantity } = action.payload;
         const carts = yield select(state => state.globalReducer.carts);
         const res = yield cartAPI.updateQuantityCartItem(cartItemId, quantity);
 
-        if(res.statusCode === 200) {
-            const {quantity} = res.data.cartItem;
+        if (res.statusCode === 200) {
+            const { quantity } = res.data.cartItem;
             const foundIndex = yield carts.items.findIndex(item => item._id);
 
             carts.items[foundIndex].quantity = quantity;
@@ -88,12 +85,10 @@ function* updateQuantityCartItem_saga(action) {
 function* deleteCartItem_saga(action) {
     try {
         const { cartItemId } = action.payload;
-        
+
         const res = yield cartAPI.deleteCartItem(cartItemId);
 
-        if(res.statusCode === 200) {
-            
-
+        if (res.statusCode === 200) {
             yield put(actions.actions.getSyncCart());
         }
     }

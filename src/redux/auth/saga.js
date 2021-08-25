@@ -34,8 +34,10 @@ function* loginClient_saga(action) {
 
         const res = yield authAPI.loginClient(username, password);
 
+        console.log(res);
         if (res.statusCode === 200) {
             const sessionKey = res.data.access_token;
+            
             writeLocalStorage(ACCESS_TOKEN, sessionKey);
 
             yield put(authActions.actions.updateState({

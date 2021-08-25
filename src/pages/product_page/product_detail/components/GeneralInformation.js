@@ -1,12 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RatingStarDisplay from '@src/components/packages/base/RatingStarDisplay';
 import Button from '@src/components/packages/base/Button';
 import { FaTruck, FaShippingFast } from 'react-icons/fa';
-import { IoRemove, IoAdd, IoCart, IoShieldCheckmarkSharp, IoArrowUndoCircle } from 'react-icons/io5';
+import {
+    IoRemove,
+    IoAdd,
+    IoCart,
+    IoShieldCheckmarkSharp,
+    IoArrowUndoCircle
+} from 'react-icons/io5';
 import styled from 'styled-components';
 import { numberWithCommas } from '@src/components/packages/core/helpers/number';
+import { useDispatch } from 'react-redux';
+import globalActions from '@src/redux/global/actions';
+import useToast from '@src/components/packages/core/hooks/useToast';
 
 const GeneralInformation = ({ product }) => {
+
+    const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(1);
+
+    const {addToast} = useToast();
+
+    const handleChangeQuantity = (n) => {
+        if(!Number(n)) {
+            addToast({
+                type: 'error',
+                title: 'Quantity must be a number'
+            });
+            return;
+        }
+        
+        if(n < 1) {
+            addToast({
+                type: 'error',
+                title: 'Quantity must be more than 1'
+            });
+            return;
+        }
+
+        setQuantity(n);
+            
+    }
+    const handleAddToCart = () => {
+        dispatch(globalActions.actions.addToCart(product._id, quantity));
+    }
     return (
         <GeneralWrapper>
             <ImageContainer>
@@ -125,18 +163,26 @@ const GeneralInformation = ({ product }) => {
                             <IconButton>
                                 <IoRemove />
                             </IconButton>
-                            <InputNumber defaultValue='1' />
+                            <InputNumber
+                                value={quantity}
+                                onChange={(e) => handleChangeQuantity(e.target.value)}
+                            />
                             <IconButton>
                                 <IoAdd />
                             </IconButton>
                         </QuantityContent>
                     </QuantityBox>
                     <BuyBox>
-                        <ButtonAddToCard>
+                        <ButtonAddToCard
+                            onClick={handleAddToCart}
+                        >
                             <IoCart />
                             Add to cart
                         </ButtonAddToCard>
-                        <ButtonBuyNow>Buy Now</ButtonBuyNow>
+                        <ButtonBuyNow
+                            onClick={handleAddToCart}
+                        >
+                        Buy Now</ButtonBuyNow>
                     </BuyBox>
                 </InfoWrapper>
                 <AdsBox>
