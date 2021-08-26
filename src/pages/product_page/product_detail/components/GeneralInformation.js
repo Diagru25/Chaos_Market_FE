@@ -18,32 +18,21 @@ import useToast from '@src/components/packages/core/hooks/useToast';
 const GeneralInformation = ({ product }) => {
 
     const dispatch = useDispatch();
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState('1');
 
-    const {addToast} = useToast();
+    const { addToast } = useToast();
 
     const handleChangeQuantity = (n) => {
-        if(!Number(n)) {
-            addToast({
-                type: 'error',
-                title: 'Quantity must be a number'
-            });
-            return;
-        }
-        
-        if(n < 1) {
-            addToast({
-                type: 'error',
-                title: 'Quantity must be more than 1'
-            });
-            return;
-        }
 
-        setQuantity(n);
-            
+        if (Number(n) || n === '')
+            setQuantity(n);
+
     }
     const handleAddToCart = () => {
-        dispatch(globalActions.actions.addToCart(product._id, quantity));
+        if(Number(quantity))
+            dispatch(globalActions.actions.addToCart(product._id, quantity));
+        
+        setQuantity('1');
     }
     return (
         <GeneralWrapper>
@@ -182,7 +171,7 @@ const GeneralInformation = ({ product }) => {
                         <ButtonBuyNow
                             onClick={handleAddToCart}
                         >
-                        Buy Now</ButtonBuyNow>
+                            Buy Now</ButtonBuyNow>
                     </BuyBox>
                 </InfoWrapper>
                 <AdsBox>

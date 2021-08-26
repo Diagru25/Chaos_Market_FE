@@ -67,11 +67,11 @@ function* updateQuantityCartItem_saga(action) {
 
         if (res.statusCode === 200) {
             const { quantity } = res.data.cartItem;
-            const foundIndex = yield carts.items.findIndex(item => item._id);
+            const foundIndex = yield carts.items.findIndex(item => item._id === cartItemId);
 
             carts.items[foundIndex].quantity = quantity;
 
-            yield put(actions.actions.updateState(carts))
+            yield put(actions.actions.updateState(carts));
         }
         else {
             console.log('update failed');
@@ -85,11 +85,17 @@ function* updateQuantityCartItem_saga(action) {
 function* deleteCartItem_saga(action) {
     try {
         const { cartItemId } = action.payload;
-
+        const carts = yield select(state => state.globalReducer.carts);
         const res = yield cartAPI.deleteCartItem(cartItemId);
 
         if (res.statusCode === 200) {
-            yield put(actions.actions.getSyncCart());
+            const { quantity } = res.data.cartItem;
+            const foundIndex = yield carts.items.findIndex(item => item._id === cartItemId);
+
+            carts.items.splice(foundIndex, 1);
+            carts.total -= quantity;
+
+            yield put(actions.actions.updateState(carts));
         }
     }
     catch (error) {

@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect } from 'react';
 import { store } from '../redux/store';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 
@@ -10,11 +10,13 @@ import ClientSite from '@src/main/client_site/ClientSite';
 import Loading from '@src/components/loading/Loading';
 import ToastContainer from '@src/components/packages/base/Toast';
 import authActions from '@src/redux/auth/actions';
+import globalActions from '@src/redux/global/actions';
 
 const App = () => {
 
     useEffect(() => {
         store.dispatch(authActions.actions.getUserInfo());
+        store.dispatch(globalActions.actions.getSyncCart());
     },[])
     
 

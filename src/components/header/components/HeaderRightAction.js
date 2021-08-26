@@ -13,11 +13,13 @@ import styled from 'styled-components';
 import userAvatar from '@src/assets/images/user.png';
 import { clientPaths } from '@src/routes/routes.constant';
 import authActions from '@src/redux/auth/actions';
+import Badge from '@src/components/packages/base/Badge';
 
 const HeaderRightAction = ({ className }) => {
 
     const dispatch = useDispatch();
     const { userInfo } = useSelector(state => state.authReducer);
+    const {total} = useSelector(state => state.globalReducer.carts);
 
     const [isToggle, setIsToggle] = useState(false);
 
@@ -34,8 +36,18 @@ const HeaderRightAction = ({ className }) => {
 
             <Link to={clientPaths.CART_DETAIL} style={{ display: 'flex', alignItems: 'center' }}>
                 <ActionIcon>
+                {
+                    total > 0
+                    ?
+                    <Badge>
+                        {total > 99 ? '99+' : total}
+                    </Badge>
+                    :
+                    null
+                }
                     <IoCartOutline />
                 </ActionIcon>
+
             </Link>
 
             {
@@ -64,7 +76,7 @@ const HeaderRightAction = ({ className }) => {
                     :
                     <div>
                         <LoginButton to={clientPaths.AUTH_LOGIN}>Sign in</LoginButton>
-                        | 
+                        |
                         <LoginButton to={clientPaths.AUTH_REGISTER}>Register</LoginButton>
                     </div>
             }
@@ -80,7 +92,7 @@ const Wrapper = styled.div`
 `;
 
 const ActionIcon = styled.div`
-
+    position: relative;
     display: flex;
     align-items: center;
 

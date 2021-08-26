@@ -6,13 +6,14 @@ import styled from 'styled-components';
 import { IoRemove, IoAdd, IoTrashOutline } from 'react-icons/io5';
 import CartNull from './components/CartNull';
 import useToast from '@src/components/packages/core/hooks/useToast';
+import Button from '@src/components/packages/base/Button';
 
 
 const CartPage = () => {
 
     const { addToast } = useToast();
     const dispatch = useDispatch();
-    const { items, isGetSyncCartPending } = useSelector(state => state.globalReducer.carts);
+    const { items, isGetSyncCartPending, prePaymentProductList } = useSelector(state => state.globalReducer.carts);
 
     useEffect(() => {
         dispatch(globalActions.actions.getSyncCart());
@@ -27,12 +28,12 @@ const CartPage = () => {
             return;
         }
 
-        dispatch(globalActions.actions.updateQuantityCartItem(cartItemId, quantity));
+        if (Number(quantity))
+            dispatch(globalActions.actions.updateQuantityCartItem(cartItemId, Number(quantity)));
     }
 
-    const handleKeyDown = (e, cartItemId) => {
+    const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            handleChangeQuantity(cartItemId, e.target.value);
             e.target.blur();
         }
     }
@@ -42,18 +43,43 @@ const CartPage = () => {
     }
 
     const handleOnChange = (e, cartItemId) => {
-        dispatch(globalActions.actions.updateQuantityCartItemReducer(cartItemId, e.target.value));
+        if (Number(e.target.value))
+            dispatch(globalActions.actions.updateQuantityCartItemReducer(cartItemId, Number(e.target.value)));
     }
 
     const handleDelete = (cartItemId) => {
         dispatch(globalActions.actions.deleteCartItem(cartItemId))
     }
 
+    const handleCheckClick = (e, item) => {
+        const checked = e.target.checked;
+        if (checked)
+            dispatch(globalActions.actions.addCartItemToPrePayment(item));
+        else
+            dispatch(globalActions.actions.removeCartItemToPrePayment(item._id));
+    }
+
+    const calAmount = (array) => {
+        let amount = 0;
+
+        array.forEach(item => amount += (item.product.price - item.product.price * item.product.discount / 100)*item.quantity);
+
+        return numberWithCommas(amount);
+    }
+
+    const calTotalProduct = (array) => {
+        let total = 0;
+
+        array.forEach(item => total += item.quantity);
+
+        return numberWithCommas(total);
+    }
+
     const renderCartItems = (item) => {
         const product = item.product;
         return (
             <tr key={item._id}>
-                <td><input type='checkbox' /></td>
+                <td><input type='checkbox' onClick={(e) => handleCheckClick(e, item)} /></td>
                 <td>
                     <ProductInfoBox>
                         <Image src={
@@ -98,7 +124,7 @@ const CartPage = () => {
                         <InputNumber
                             value={item.quantity}
                             onChange={(e) => handleOnChange(e, item._id)}
-                            onKeyDown={(e) => handleKeyDown(e, item._id)}
+                            onKeyDown={handleKeyDown}
                             onBlur={(e) => handleBlur(e, item._id)}
                         />
                         <IconButton onClick={() => handleChangeQuantity(item._id, item.quantity + 1)}>
@@ -108,10 +134,10 @@ const CartPage = () => {
                 </td>
                 <td>
                     $
-                    {numberWithCommas(product.price * item.quantity)}
+                    {numberWithCommas((product.price - product.price * product.discount / 100) * item.quantity)}
                 </td>
                 <td>
-                    <DeleteButton onClick={() => handleDelete(item._id)}/>
+                    <DeleteButton onClick={() => handleDelete(item._id)} />
                 </td>
             </tr>
         )
@@ -135,19 +161,40 @@ const CartPage = () => {
                             ?
                             <CartNull />
                             :
-                            <Table>
-                                <tbody>
-                                    <tr>
-                                        <td><input type='checkbox' /></td>
-                                        <td>Product</td>
-                                        <td>Price</td>
-                                        <td>Quantity</td>
-                                        <td>Amount</td>
-                                        <td>Actions</td>
-                                    </tr>
-                                    {items.map((item) => renderCartItems(item))}
-                                </tbody>
-                            </Table>
+                            <TableWrapper>
+                                <Table>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type='checkbox' /></td>
+                                            <td>Product</td>
+                                            <td>Price</td>
+                                            <td>Quantity</td>
+                                            <td>Amount</td>
+                                            <td>Actions</td>
+                                        </tr>
+                                        {items.map((item) => renderCartItems(item))}
+                                    </tbody>
+                                </Table>
+                                <PrePaymentBox>
+                                    <TotalProduct>
+                                        You choose (
+                                        {calTotalProduct(prePaymentProductList)}
+                                        ) product
+                                    </TotalProduct>
+                                    <PaymentBox>
+                                        <Amount>
+                                            $
+                                            {
+                                                calAmount(prePaymentProductList)
+                                            }
+                                        </Amount>
+                                        <PaymentButton>
+                                            PAYMENT NOW
+                                        </PaymentButton>
+                                    </PaymentBox>
+                                </PrePaymentBox>
+                            </TableWrapper>
+
                 }
             </Container>
         </Wrapper>
@@ -195,7 +242,6 @@ const Name = styled.span`
 
 const Table = styled.table`
     border-spacing: 0;
-    width: 100%;
     tbody {
         display: flex;
         flex-direction: column;
@@ -304,6 +350,43 @@ const DeleteButton = styled(IoTrashOutline)`
         opacity: 0.8;
     }
 `;
+
+const TableWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+`;
+
+const PrePaymentBox = styled.div`
+    background: #fff;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+`;
+const TotalProduct = styled.div`
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px;
+    line-height: 1.5;
+    
+`;
+const PaymentBox = styled.div`
+    display: flex;
+    gap: 15px;
+`;
+const Amount = styled.div`
+    display: inline-flex;
+    align-items: center;
+    font-size: 20px;
+    color: #ee4d2d;
+`;
+const PaymentButton = styled(Button)`
+    background: #ee4d2d;
+    border: 1px solid #ee4d2d;
+    padding: 15px 25px;
+`;
+
 
 
 export default CartPage;

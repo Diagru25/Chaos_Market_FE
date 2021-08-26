@@ -72,7 +72,7 @@ const reducer = (state = initialState, action) => {
                     isGetBrandsPending: false
                 }
             }
-        case globalActions.types.GET_LIST_BRANDS_FAILED: 
+        case globalActions.types.GET_LIST_BRANDS_FAILED:
             return {
                 ...state,
                 brands: {
@@ -81,19 +81,19 @@ const reducer = (state = initialState, action) => {
                     error: payload.error
                 }
             }
-        
+
         //toasts
         case globalActions.types.ADD_TOAST:
             return {
                 ...state,
-                toasts: [...state.toasts, {...payload.options}]
+                toasts: [...state.toasts, { ...payload.options }]
             }
         case globalActions.types.REMOVE_TOAST:
             return {
                 ...state,
                 toasts: [...state.toasts].filter(element => element.id !== payload.id)
             }
-        case globalActions.types.UPDATE_STATE: 
+        case globalActions.types.UPDATE_STATE:
             return {
                 ...state,
                 ...payload.state
@@ -127,22 +127,53 @@ const reducer = (state = initialState, action) => {
                 }
             }
         case globalActions.types.UPDATE_QUANTITY_CART_ITEM_REDUCER:
-            const cloneItems = [...state.carts.items]
-            const foundIndex = cloneItems.findIndex(item => item._id === payload.cartItemId);
-            if(foundIndex !== -1)
-                cloneItems[foundIndex].quantity = payload.quantity;
-            
-            return {
-                ...state,
-                carts: {
-                    ...state.carts,
-                    items: cloneItems
+            {
+                const cloneItems = [...state.carts.items]
+                const foundIndex = cloneItems.findIndex(item => item._id === payload.cartItemId);
+                if (foundIndex !== -1)
+                    cloneItems[foundIndex].quantity = payload.quantity;
+
+                return {
+                    ...state,
+                    carts: {
+                        ...state.carts,
+                        items: cloneItems
+                    }
+                }
+            }
+
+        case globalActions.types.ADD_CART_ITEM_TO_PRE_PAYMENT:
+            {
+                const cloneItems = [...state.carts.prePaymentProductList]
+                cloneItems.push(payload.cartItem);
+
+                return {
+                    ...state,
+                    carts: {
+                        ...state.carts,
+                        prePaymentProductList: cloneItems
+                    }
+                }
+            }
+        
+        case globalActions.types.REMOVE_CART_ITEM_TO_PRE_PAYMENT:
+            {
+                const cloneItems = [...state.carts.prePaymentProductList];
+                const foundIndex = cloneItems.findIndex(item => item._id === payload.cartItemId);
+                cloneItems.splice(foundIndex, 1);
+
+                return {
+                    ...state,
+                    carts: {
+                        ...state.carts,
+                        prePaymentProductList: cloneItems
+                    }
                 }
             }
 
         case globalActions.types.ADD_TO_CART:
             return state
-            
+
         default:
             return { ...state }
     }

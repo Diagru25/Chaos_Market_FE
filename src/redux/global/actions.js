@@ -21,7 +21,9 @@ const types = {
     ADD_TO_CART: 'ADD_TO_CART',
     UPDATE_QUANTITY_CART_ITEM: 'UPDATE_CART_ITEM',
     UPDATE_QUANTITY_CART_ITEM_REDUCER: 'UPDATE_QUANTITY_CART_ITEM_REDUCER',
-    DELETE_CART_ITEM: 'DELETE_CART_ITEM'
+    DELETE_CART_ITEM: 'DELETE_CART_ITEM',
+    ADD_CART_ITEM_TO_PRE_PAYMENT: 'ADD_CART_ITEM_TO_PRE_PAYMENT',
+    REMOVE_CART_ITEM_TO_PRE_PAYMENT: 'REMOVE_CART_ITEM_TO_PRE_PAYMENT'
 }
 
 const actions = {
@@ -154,6 +156,24 @@ const actions = {
     deleteCartItem: (cartItemId) => {
         return {
             type: types.DELETE_CART_ITEM,
+            payload: {
+                cartItemId
+            }
+        }
+    },
+
+    addCartItemToPrePayment: (cartItem) => {
+        return {
+            type: types.ADD_CART_ITEM_TO_PRE_PAYMENT,
+            payload: {
+                cartItem
+            }
+        }
+    },
+
+    removeCartItemToPrePayment: (cartItemId) => {
+        return {
+            type: types.REMOVE_CART_ITEM_TO_PRE_PAYMENT,
             payload: {
                 cartItemId
             }
